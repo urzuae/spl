@@ -1,0 +1,108 @@
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2"> <tbody>
+        <tr style="cursor:pointer" onclick="var v=document.getElementById('bloque_101');	var i=document.getElementById('img_101'); var o=document.getElementById('open');	if(v.style.display=='none'){v.style.display='block';i.src='img/less.gif';o.value = o.value+'101'+'-';}else{ v.style.display='none';i.src='img/more.gif';o.value = o.value.replace('101 ','')}">
+        <th><img src="img/pixel.gif" width="15px"><img src="img/more.gif" id="img_101"> 0001-1  INTERESADO</th>
+        </tr>
+        </table>
+        <div id="bloque_101" style="display:none;">
+        <table id="tabla_contactos1" class="tablesorter" >
+            <thead>
+              <tr>
+              <th style="width:150px; cursor:pointer;">Origen</td>
+              <th style="width:360px; cursor:pointer;">Nombre</th>
+              <th style="width:340px; cursor:pointer;">Vendedor</th>
+              <th style="width:150px; cursor:pointer;">Registro</th>
+              <th style="width:170px; cursor:pointer;">Tel o Email</th>
+              <th style="width:170px; cursor:pointer;">Producto</th>
+              <th style="width:170px; cursor:pointer;">Compromiso</th>
+              <th style="width:150px; cursor:pointer;">Retraso (hrs)</th>
+              <th style="width:32px; cursor:pointer;">Sel.</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr class="row1">
+                        <td>INTERNET</td>
+                        <td>
+                            <a class='background-color:#fff;' target="llamada" href="index.php?_module=Campanas&_op=llamada_ro&llamada_id=1&contacto_id=1&campana_id=101">
+                             ABRAHAM GALLEGOS GARCIA</a>
+                        </td>
+                        <td>0001CINTHIA</td>
+                        <td>2011-01-11 16:05:58</td>
+                        <td>(55) 44332211   <br>urzuae@gmail.com</td>
+                        <td></td><td></td>
+                        <td></td>
+                        <td><input type="checkbox" name="chbx_1" style="height:12;width:16;"></td></tr></tbody><tr class="row2"><td align="right"><b>Total</b></td><td><b>1</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></table></div><table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2"> <tbody>
+        <tr style="cursor:pointer" onclick="var v=document.getElementById('bloque_102');	var i=document.getElementById('img_102'); var o=document.getElementById('open');	if(v.style.display=='none'){v.style.display='block';i.src='img/less.gif';o.value = o.value+'102'+'-';}else{ v.style.display='none';i.src='img/more.gif';o.value = o.value.replace('102 ','')}">
+        <th><img src="img/pixel.gif" width="15px"><img src="img/more.gif" id="img_102"> 0001-2  PROSPECTO</th>
+        </tr>
+        </table>
+        <div id="bloque_102" style="display:none;">
+        <table id="tabla_contactos2" class="tablesorter" >
+            <thead>
+              <tr>
+              <th style="width:150px; cursor:pointer;">Origen</td>
+              <th style="width:360px; cursor:pointer;">Nombre</th>
+              <th style="width:340px; cursor:pointer;">Vendedor</th>
+              <th style="width:150px; cursor:pointer;">Registro</th>
+              <th style="width:170px; cursor:pointer;">Tel o Email</th>
+              <th style="width:170px; cursor:pointer;">Producto</th>
+              <th style="width:170px; cursor:pointer;">Compromiso</th>
+              <th style="width:150px; cursor:pointer;">Retraso (hrs)</th>
+              <th style="width:32px; cursor:pointer;">Sel.</th></tr>
+                      </thead>
+                      <tbody></tbody><tr class="row1"><td align="right"><b>Total</b></td><td><b>0</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></table></div><table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2"> <tbody>
+        <tr style="cursor:pointer" onclick="var v=document.getElementById('bloque_103');	var i=document.getElementById('img_103'); var o=document.getElementById('open');	if(v.style.display=='none'){v.style.display='block';i.src='img/less.gif';o.value = o.value+'103'+'-';}else{ v.style.display='none';i.src='img/more.gif';o.value = o.value.replace('103 ','')}">
+        <th><img src="img/pixel.gif" width="15px"><img src="img/more.gif" id="img_103"> 0001-3  PRESENTACION SF</th>
+        </tr>
+        </table>
+        <div id="bloque_103" style="display:none;">
+        <table id="tabla_contactos3" class="tablesorter" >
+            <thead>
+              <tr>
+              <th style="width:150px; cursor:pointer;">Origen</td>
+              <th style="width:360px; cursor:pointer;">Nombre</th>
+              <th style="width:340px; cursor:pointer;">Vendedor</th>
+              <th style="width:150px; cursor:pointer;">Registro</th>
+              <th style="width:170px; cursor:pointer;">Tel o Email</th>
+              <th style="width:170px; cursor:pointer;">Producto</th>
+              <th style="width:170px; cursor:pointer;">Compromiso</th>
+              <th style="width:150px; cursor:pointer;">Retraso (hrs)</th>
+              <th style="width:32px; cursor:pointer;">Sel.</th></tr>
+                      </thead>
+                      <tbody></tbody><tr class="row2"><td align="right"><b>Total</b></td><td><b>0</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></table></div><table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2"> <tbody>
+        <tr style="cursor:pointer" onclick="var v=document.getElementById('bloque_104');	var i=document.getElementById('img_104'); var o=document.getElementById('open');	if(v.style.display=='none'){v.style.display='block';i.src='img/less.gif';o.value = o.value+'104'+'-';}else{ v.style.display='none';i.src='img/more.gif';o.value = o.value.replace('104 ','')}">
+        <th><img src="img/pixel.gif" width="15px"><img src="img/more.gif" id="img_104"> 0001-4  CLIENTE</th>
+        </tr>
+        </table>
+        <div id="bloque_104" style="display:none;">
+        <table id="tabla_contactos4" class="tablesorter" >
+            <thead>
+              <tr>
+              <th style="width:150px; cursor:pointer;">Origen</td>
+              <th style="width:360px; cursor:pointer;">Nombre</th>
+              <th style="width:340px; cursor:pointer;">Vendedor</th>
+              <th style="width:150px; cursor:pointer;">Registro</th>
+              <th style="width:170px; cursor:pointer;">Tel o Email</th>
+              <th style="width:170px; cursor:pointer;">Producto</th>
+              <th style="width:170px; cursor:pointer;">Compromiso</th>
+              <th style="width:150px; cursor:pointer;">Retraso (hrs)</th>
+              <th style="width:32px; cursor:pointer;">Sel.</th></tr>
+                      </thead>
+                      <tbody></tbody><tr class="row1"><td align="right"><b>Total</b></td><td><b>0</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></table></div><table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2"> <tbody>
+        <tr style="cursor:pointer" onclick="var v=document.getElementById('bloque_105');	var i=document.getElementById('img_105'); var o=document.getElementById('open');	if(v.style.display=='none'){v.style.display='block';i.src='img/less.gif';o.value = o.value+'105'+'-';}else{ v.style.display='none';i.src='img/more.gif';o.value = o.value.replace('105 ','')}">
+        <th><img src="img/pixel.gif" width="15px"><img src="img/more.gif" id="img_105"> 0001-5  POSTVENTA</th>
+        </tr>
+        </table>
+        <div id="bloque_105" style="display:none;">
+        <table id="tabla_contactos5" class="tablesorter" >
+            <thead>
+              <tr>
+              <th style="width:150px; cursor:pointer;">Origen</td>
+              <th style="width:360px; cursor:pointer;">Nombre</th>
+              <th style="width:340px; cursor:pointer;">Vendedor</th>
+              <th style="width:150px; cursor:pointer;">Registro</th>
+              <th style="width:170px; cursor:pointer;">Tel o Email</th>
+              <th style="width:170px; cursor:pointer;">Producto</th>
+              <th style="width:170px; cursor:pointer;">Compromiso</th>
+              <th style="width:150px; cursor:pointer;">Retraso (hrs)</th>
+              <th style="width:32px; cursor:pointer;">Sel.</th></tr>
+                      </thead>
+                      <tbody></tbody><tr class="row2"><td align="right"><b>Total</b></td><td><b>0</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></table></div><table class="width100"><thead><tr class="row1"><th></th><th align="left" colspan="6"><b>Total</b><b> 1</b></th></tr></thead></table><table class="width100"><tr class="row2" style="text-align:center;"><td colspan=7><input name="all" type="button" onclick="allon();" value="Todos">&nbsp;<input name="none" type="button" onclick="alloff();" value="Ninguno"></td></tr><tr class="row1" style="text-align:center;"><td colspan=7><input type="submit" name="seleccionar" value="Reasignar"></td></tr><tr class="row2" style="text-align:center;"></table>
