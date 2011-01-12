@@ -776,9 +776,9 @@ else //hay un evento, cerrar o cancelar o posponer
   $cerrar_evento .= "Comentario<br>";
   $cerrar_evento .= "<input name=\"evento_cierre_comentario\" id=\"evento_cierre_comentario\"  style=\"width:180px;\" onblur=\"caps1(this);\"><br><br>";
   $cerrar_evento .= "";
-  $botones_submit .= "<input value=\"Cancelar\" name=\"submit_cancelar_evento\" type=\"submit\" style=\"width:180px;\"><br>";
+  $botones_submit .= "<input value=\"Guardar\" name=\"submit_registrar\" type=\"submit\" style=\"width:180px;\" onclick=\"if (document.getElementById('evento_cierre_comentario').value == ''){alert('Ingrese una comentario para guardar'); return false;}return true;\">";
   $botones_submit .= "<input value=\"Posponer\" name=\"submit_posponer\" type=\"submit\" style=\"width:180px;\" ><br>".$msg_prosponer;
-  $botones_submit .= "<input value=\"Registrar\" name=\"submit_registrar\" type=\"submit\" style=\"width:180px;\" onclick=\"if (document.getElementById('evento_cierre_comentario').value == ''){alert('Ingrese una comentario para guardar'); return false;}return true;\">";
+  $botones_submit .= "<input value=\"Cancelar\" name=\"submit_cancelar_evento\" type=\"submit\" style=\"width:180px;\"><br>";
   
   //estos 2 siguientes no se pueden modificar
   $input_evento_comentario = "<b>$evento_comentario</b>"; //este no se puede modificar

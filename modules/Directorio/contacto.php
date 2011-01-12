@@ -424,18 +424,19 @@ list($super) = $db->sql_fetchrow($cs);
 $origen_readonly='';
 if($super == 8 and $contacto_id != "")
 {
-	$origen_readonly = 'disabled="disabled"';
+  $origen_readonly = 'disabled="disabled"';
 }
 if( (!empty($origen)) && ($origen != 0))
 {
-    $tmp_nom_origen=recupera_nombre($db,$origen);
+  $tmp_nom_origen=recupera_nombre($db,$origen);
 }
 
 
 $ret_prod = $db->sql_query("SELECT * FROM `crm_unidades`");
 while(list($id_prod, $name_prod) = $db->sql_fetchrow($ret_prod))
 {
-	$select_product .= "<option value=$id_prod>$name_prod</option>";
+  $selected_prod = $name_prod == $modelo ? "selected" : "";
+  $select_product .= "<option value=$id_prod $selected>$name_prod</option>";
 }
 
 
