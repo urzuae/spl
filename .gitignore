@@ -1,0 +1,6 @@
+.svn
+*/.svn
+*/*/.svn
+*/*/*/.svn
+*/*/*/*/.svn
+config.php
