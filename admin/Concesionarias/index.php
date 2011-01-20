@@ -13,8 +13,8 @@ if($desbloquea)
     $error="Se ha desbloqueado la distribuidora con id:  ".$desbloquea;
 
 }
-if($del)
-{
+	if($del)
+	{
     $sql="SELECT gid,name FROM delete_groups WHERE gid=".$del.";";
     $res=$db->sql_query($sql);
     if($db->sql_numrows($res) == 0)
@@ -34,7 +34,19 @@ if($del)
     // Eliminamos vendedores de la concesionaria eliminada
     $db->sql_query("INSERT INTO delete_users ( SELECT uid,gid,super,name FROM users WHERE gid=".$del.");");
     $db->sql_query("DELETE FROM users WHERE gid=".$del.";");
-}
+    
+    /*$client=new SoapClient(null,array('uri'=>'http://localhost','location'=>'http://10.0.0.18/spl/index.php?_module=Interfaces&_op=spd'));
+    $resultado = $client->delete_distributor();
+    if($result)
+    {
+			echo("<html><head><script>alert('Distribuidor eliminado satisfactoriamente');</script></head></html>");
+    }
+    else
+    {
+			die("<html><head><script>alert('Error al enviar/recibir datos');window.close();</script></head></html>");
+    }*/
+		
+	}
 
 // Inicio del modulo
 // Verificamos que ya haya un ciclo de venta establecido

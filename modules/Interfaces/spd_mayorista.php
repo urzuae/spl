@@ -1,27 +1,32 @@
 <?
-	if(!defined('_IN_MAIN_INDEX'))
-		die("No puedes accesar");
-	
-	global $db, $data, $_theme;
-	
-	$_theme = "";
-	
-	$params = array();
-	if (isset($_POST['data']))
+	class distributor
 	{
-		//$data = json_decode($_POST['data']);
-		$data = unserialize($data);
-		
-		print_r($data);
-		
-		foreach ($data as $key=>$value)
-			$params[]=$value;
-		
-		$name = $params[0];
-		$u_id = $params[1];
-		
-		$sql = "SELECT gid FROM crm_users WHERE name='$group' AND uid='$u_id'";
-		list($gid) = $db->sql_fetchrow($db->sql_query($sql) or die()) or die();
-		$sql = "UPDATE groups SET id_mayorista='$gid' WHERE gid='$gid'";
-		
+		public function new_distributor($params)
+		{
+			$data = array();
+			
+			foreach ($params as $key=>$value)
+				$data[] = $value;
+			
+			$distribuidor_id = $data[0];
+			$contacto_id = $data[1];
+			$name = $data[2];
+			$user = $data[3];
+			
+			$sql = "SELECT * FROM distribuidores WHERE distribuidor_id='$distribuidor_id'";
+			$result = $db->sql_query($sql) or die();
+			
+			if($db->sql_numrows($result) > 0)
+			{
+				return false;
+			}
+			else
+			{
+				$sql = "INSERTO INTO distribuidores (distribuidor_id, contacto_id, name, status, username)
+					VALUES ('$distribuidor_id','$contacto_id','$name','1', $user)";
+				$db->sql_query($sql) or die($sql);
+				return true;
+			}
+		}
+	}
 ?>
