@@ -21,8 +21,10 @@
 	$_menu = "<br>\n";
 
 	$result = $db->sql_query("SELECT user, name, super, gid FROM users WHERE uid='$uid'") or die("Error al buscar nombre de usuario");
-
 	list($user, $name, $super, $gid) = htmlize($db->sql_fetchrow($result));
+	
+	$result = $db->sql_query("SELECT id_mayorista FROM groups WHERE gid='$gid'") or die("Error al buscar mayorista");
+	list($id_mayorista) = $db->sql_fetchrow($result);
 
 	if ($gid == "0001") //gerente de zona
 	{
@@ -97,11 +99,19 @@
 			$files["Reportes"] = "";
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Campa&ntilde;as"] = "Estadisticas&_op=campanas";
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Ciclo de venta"] = "Estadisticas&_op=ciclo";
+				$files[""] = "";
 		}
 		else
 		{
 			$files = array("Capturar prospecto" => "Directorio&_op=contacto", "Prospectos" => "Campanas","Compromisos" => "Campanas&_op=compromisos");
 		}
+	}
+	
+	if($id_mayorista == $gid)
+	{
+		$files[""] = "";
+		$files["Distribuidores"] = "";
+			$files["&nbsp;&nbsp;&nbsp;&nbsp;Distribuidores"] = "Mayorista";
 	}
 
 	foreach ($files AS $key => $file)
