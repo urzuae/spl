@@ -100,6 +100,12 @@
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Campa&ntilde;as"] = "Estadisticas&_op=campanas";
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Ciclo de venta"] = "Estadisticas&_op=ciclo";
 				$files[""] = "";
+			if($id_mayorista == $gid)
+			{
+				$files[""] = "";
+				$files["Distribuidores"] = "";
+					$files["&nbsp;&nbsp;&nbsp;&nbsp;Distribuidores"] = "Mayorista";
+			}
 		}
 		else
 		{
@@ -107,13 +113,6 @@
 		}
 	}
 	
-	if($id_mayorista == $gid)
-	{
-		$files[""] = "";
-		$files["Distribuidores"] = "";
-			$files["&nbsp;&nbsp;&nbsp;&nbsp;Distribuidores"] = "Mayorista";
-	}
-
 	foreach ($files AS $key => $file)
 	{
 		if ($file)

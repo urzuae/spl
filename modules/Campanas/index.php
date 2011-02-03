@@ -14,16 +14,17 @@ $result = $db->sql_query("SELECT gid FROM users WHERE uid='$uid' LIMIT 1") or di
 list($gid) = $db->sql_fetchrow($result);
 if ($gid != 0) $where_gid = " AND gid='$gid'";
 
-$sql = "SELECT c.campana_id, nombre FROM crm_campanas AS c, crm_campanas_groups  AS g WHERE c.campana_id=g.campana_id $where_gid ORDER BY $orderby LIMIT $from, $how_many";
+$sql = "SELECT c.campana_id, c.nombre FROM crm_campanas AS c, crm_campanas_groups  AS g WHERE c.campana_id=g.campana_id AND g.gid='$gid' ORDER BY $orderby";
 $result = $db->sql_query($sql) or die("Error al consultar campañas ".print_r($db->sql_error()));
 $tabla_campanas .= "<table border=\"0\" style=\"width:450px;\">\n";
 $tabla_campanas .= "<thead><tr>"
-                    ."<td ><a href=\"index.php?_module=$_module&_op=$_op&orderby=nombre\" style=\"color:#ffffff\">Nombre</a></td>"
+                    ."<td ><a href=\"index.php?_module=$_module&_op=$_op&orderby=$orderby\" style=\"color:#ffffff\">Nombre</a></td>"
                      ."<td>Prospectos</td>"
                      ."<td colspan=\"3\" width=\"40px\">Acción</td>"
 		     ."<td colspan=\"3\" width=\"40px\">Buscar</td>"
 		     ."<td colspan=\"3\" width=\"40px\">Status</td>"
                     ."</tr></thead>\n";
+//list($campana_id, $name) =htmlize($db->sql_fetchrow($result));
 while (list($campana_id, $name) =htmlize($db->sql_fetchrow($result)))
 {
 	$sql = "SELECT (id) FROM crm_campanas_llamadas AS l, crm_contactos AS c WHERE c.contacto_id=l.contacto_id AND c.uid='$uid' AND campana_id='$campana_id'";

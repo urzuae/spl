@@ -125,61 +125,60 @@ if (!$contacto_id) //nuevo
         {
             $modelo=$db->sql_fetchfield(1, 0, $res_modelo);
         }
-
-		$primer_cont = date_reverse($primer_cont);
-        $sql = "INSERT INTO crm_contactos (
-                    nombre, apellido_paterno, apellido_materno,
-                    sexo,
-                    compania, cargo,
-                    tel_casa, tel_oficina,
-                    tel_movil, tel_otro,
-                    email,
-                    domicilio, colonia,
-                    cp, poblacion,
-                    entidad_id,
-                    rfc, persona_moral,
-                    fecha_de_nacimiento,
-                    ocupacion,
-                    edo_civil,
-                    nota,
-                    no_contactar, uid, gid, titulo, sector, pais, ciudad,
-                    primer_contacto, origen_id, fecha_importado,
-                    razon_social, nombre_contacto,tel_casa_2,tel_oficina_2,tel_movil_2,
-                    horario_preferido_casa,horario_preferido_oficina,horario_preferido_movil,
-                    horario_preferido_casa_2,horario_preferido_oficina_2,horario_preferido_movil_2,codigo_campana,prioridad)
-                    VALUES (
-                    '$nombre', '$apellido_paterno', '$apellido_materno',
-                    '$sexo',
-                    '$compania', '$cargo',
-                    '$tel_casa', '$tel_oficina',
-                    '$tel_movil', '$tel_otro',
-                    '$email',
-                    '$domicilio', '$colonia',
-                    '$cp', '$poblacion',
-                    '$entidad_id',
-                    '$rfc', '$persona_moral',
-                    '$fecha_de_nacimiento',
-                    '$ocupacion',
-                    '$edo_civil',
-                    '$nota',
-                    '$no_contactar', '$_uid', '$gid', '$titulo', '$sector', '$pais', '$ciudad',
-                    '$primer_cont', '$origen', NOW(),
-                    '$razon_social','$nombre_contacto',
-                    '$tel_casa_2','$tel_oficina_2','$tel_movil_2',
-                    '$horario_preferido_casa','$horario_preferido_oficina','$horario_preferido_movil',
-                    '$horario_preferido_casa_2','$horario_preferido_oficina_2','$horario_preferido_movil_2','$codigo_campana','$prioridad_contacto')";
-        $db->sql_query($sql) or die("$sql<br>Error al insertar contacto".print_r($db->sql_error()));
-		$contacto_id = $db->sql_nextid();
-		$sql = "INSERT INTO crm_prospectos_unidades (
-					contacto_id,modelo, version, ano,tipo_pintura, color_exterior, color_interior,
-                    modelo_id, version_id, transmision_id
-				) VALUES (
-					'$contacto_id','$modelo', '$version', '$ano_auto','$tipo_pint', '$color_ext', '$color_int',
-                    '$idVehiculo', '$idVersion', '$idTransmision'
-				)";
-        $db->sql_query($sql) or die("$sql<br>Error al insertar contacto".print_r($db->sql_error()));
-        if ($_uid == 0)
-        {
+					$primer_cont = date_reverse($primer_cont);
+					$sql = "INSERT INTO crm_contactos (
+            nombre, apellido_paterno, apellido_materno,
+            sexo,
+            compania, cargo,
+						tel_casa, tel_oficina,
+						tel_movil, tel_otro,
+						email,
+						domicilio, colonia,
+						cp, poblacion,
+						entidad_id,
+						rfc, persona_moral,
+						fecha_de_nacimiento,
+						ocupacion,
+						edo_civil,
+						nota,
+						no_contactar, uid, gid, titulo, sector, pais, ciudad,
+						primer_contacto, origen_id, fecha_importado,
+						razon_social, nombre_contacto,tel_casa_2,tel_oficina_2,tel_movil_2,
+						horario_preferido_casa,horario_preferido_oficina,horario_preferido_movil,
+						horario_preferido_casa_2,horario_preferido_oficina_2,horario_preferido_movil_2,codigo_campana,prioridad)
+						VALUES (
+						'$nombre', '$apellido_paterno', '$apellido_materno',
+						'$sexo',
+						'$compania', '$cargo',
+						'$tel_casa', '$tel_oficina',
+						'$tel_movil', '$tel_otro',
+						'$email',
+						'$domicilio', '$colonia',
+						'$cp', '$poblacion',
+						'$entidad_id',
+						'$rfc', '$persona_moral',
+						'$fecha_de_nacimiento',
+						'$ocupacion',
+						'$edo_civil',
+						'$nota',
+						'$no_contactar', '$_uid', '$gid', '$titulo', '$sector', '$pais', '$ciudad',
+						'$primer_cont', '$origen', NOW(),
+						'$razon_social','$nombre_contacto',
+						'$tel_casa_2','$tel_oficina_2','$tel_movil_2',
+						'$horario_preferido_casa','$horario_preferido_oficina','$horario_preferido_movil',
+						'$horario_preferido_casa_2','$horario_preferido_oficina_2','$horario_preferido_movil_2','$codigo_campana','$prioridad_contacto')";
+					$db->sql_query($sql) or die("$sql<br>Error al insertar contacto".print_r($db->sql_error()));
+					$contacto_id = $db->sql_nextid();
+					$sql = "INSERT INTO crm_prospectos_unidades (
+						contacto_id,modelo, version, ano,tipo_pintura, color_exterior, color_interior,
+            modelo_id, version_id, transmision_id)
+						VALUES (
+						'$contacto_id','$modelo', '$version', '$ano_auto','$tipo_pint', '$color_ext', '$color_int',
+            '$idVehiculo', '$idVersion', '$idTransmision'
+					)";
+					$db->sql_query($sql) or die("$sql<br>Error al insertar contacto".print_r($db->sql_error()));
+					if ($_uid == 0)
+					{
             //buscar a que campaña lo meteremos
             $sql = "SELECT c.campana_id FROM crm_campanas_groups AS g, crm_campanas AS c WHERE c.campana_id=g.campana_id AND g.gid='$gid' ORDER BY c.campana_id  LIMIT 1"; //la primera que sea parte de un ciclo
             $result = $db->sql_query($sql) or die("Error al leer".print_r($db->sql_error()));
@@ -195,24 +194,24 @@ if (!$contacto_id) //nuevo
             $db->sql_query($sql) or die("Error");
 
             //luego se lo desasignamos y se le asigna al $_uid (a nadie)
-			$sql = "INSERT INTO crm_contactos_asignacion_log (contacto_id, uid, from_uid, to_uid, from_gid, to_gid)VALUES('$contacto_id','0','$uid','$_uid','0','0')";
+						$sql = "INSERT INTO crm_contactos_asignacion_log (contacto_id, uid, from_uid, to_uid, from_gid, to_gid)VALUES('$contacto_id','0','$uid','$_uid','0','0')";
             $db->sql_query($sql) or die("Error");
 
             //checamos si el user de callcenter o hostess tienen permisos  para asignar a un vendedor
             $sql = "INSERT INTO crm_contactos_callcenter (contacto_id, uid, gid)VALUES('$contacto_id', '$uid', '$gid_del_usuario')";
-			$db->sql_query($sql) or die("Error de callcenter. $sql");
-			//checar si este usuario puede asignar a vendedor directamente
+						$db->sql_query($sql) or die("Error de callcenter. $sql");
+						//checar si este usuario puede asignar a vendedor directamente
 
             $sql = "SELECT uid FROM users_asigna_vendedor WHERE uid='$uid'  LIMIT 1"; //la primera que sea parte de un ciclo
             $result = $db->sql_query($sql) or die("Error al leer".print_r($db->sql_error()));
             //ahora redirigir al módulo de seleccionar vendedor
             if ($db->sql_numrows($result) > 0)
-				$redirect = "index.php?_module=$_module&_op=asignar_vendedor&contacto_id=$contacto_id";
-			else
-				$redirect = "index.php?_module=$_module&_op=$_op";
-        }
-        else
-        {
+							$redirect = "index.php?_module=$_module&_op=asignar_vendedor&contacto_id=$contacto_id";
+						else
+							$redirect = "index.php?_module=$_module&_op=$_op";
+				  }
+				  else
+				  {
             //buscar a que campaña lo meteremos
             $sql = "SELECT c.campana_id FROM crm_campanas_groups AS g, crm_campanas AS c WHERE c.campana_id=g.campana_id AND g.gid='$gid' ORDER BY c.campana_id  LIMIT 1"; //la primera que sea parte de un ciclo
             $result = $db->sql_query($sql) or die("Error al leer".print_r($db->sql_error()));

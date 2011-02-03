@@ -34,8 +34,8 @@
     public function register_sale($param)
     {
       $_dbhost = 'localhost';
-      $_dbuname = 'root';
-      $_dbpass = 'redsox';
+      $_dbuname = 'spl';
+      $_dbpass = 'spl';
       $_dbname = 'spl';
       include("../../includes/db/mysql.php");
       $db = new sql_db($_dbhost, $_dbuname, $_dbpass, $_dbname, false);
