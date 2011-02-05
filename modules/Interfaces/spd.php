@@ -218,14 +218,14 @@ EOBODY;*/
 					$sql = "INSERT INTO users (gid,super,user,password,name,email) VALUES ('$gid','6','$user',PASSWORD('$user'),'GERENTE DISTRIBUIDORA $group','$email')";
 					$db->sql_query($sql) or die("Error<br>$sql<br>".print_r($db->sql_error()));
 					
-					/*$region_id = $region_id+0;
+					$region_id = $region_id+0;
 					$zona_id   = $zona_id+0;
 					$entidad_id = $entidad_id +0;
 					$plaza_id = $plaza_id + 0;
 					$id_nivel= $id_nivel + 0;
 					$tit='Básico';
 		
-		$msg =<<<EOBODY
+	$msg =<<<EOBODY
 				<html>
 					<head>
 						<title>Claves de acceso para el gerente</title>
@@ -241,15 +241,15 @@ EOBODY;*/
 				</html>
 EOBODY;
 		
-					//$updateGroupsUbications="UPDATE groups_ubications SET region_id=".$region_id.",zona_id=".$zona_id.", entidad_id=".$entidad_id.", plaza_id=".$plaza_id.",nivel_id=".$id_nivel.",nombre_nivel='".$tit."' WHERE gid=".$gid.";";
-					//$db->sql_query($updateGroupsUbications) or die("Error al actualizar la tabla de ubicaciones de concesionarias".$updateGroupsUbications);
-					/*$eol="\n";
+					$updateGroupsUbications="UPDATE groups_ubications SET region_id=".$region_id.",zona_id=".$zona_id.", entidad_id=".$entidad_id.", plaza_id=".$plaza_id.",nivel_id=".$id_nivel.",nombre_nivel='".$tit."' WHERE gid=".$gid.";";
+					$db->sql_query($updateGroupsUbications) or die("Error al actualizar la tabla de ubicaciones de concesionarias".$updateGroupsUbications);
+					$eol="\n";
 					$headers = 'From: salesfunnel@pcsmexico.com' . $eol;
 					$headers .= 'Reply-To: <salesfunnel@pcsmexico.com>' . $eol;
 					$headers .= 'Return-Path: <salesfunnel@pcsmexico.com>' . $eol;
 					$headers .= 'Content-Type: text/html; charset=iso-8859-1';
 					
-					mail( $email, "Alta de distribuidora", $msg, $headers);*/
+					mail( $email, "Alta de distribuidora", $msg, $headers);
 					//header("location: index.php?_module=Concesionarias");    
 				}
 				return $gid;
