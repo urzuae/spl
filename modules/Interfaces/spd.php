@@ -152,9 +152,10 @@ EOBODY;*/
 				$_dbuname = 'spl';
 				$_dbpass = 'spl';
 				$_dbname = 'spl';
+				$key = "";
+				$value = "";
 				include("../../includes/db/mysql.php");
 				$db = new sql_db($_dbhost, $_dbuname, $_dbpass, $_dbname, false);
-
 				
 				$data = $param;
 				$params = array();
@@ -166,12 +167,13 @@ EOBODY;*/
 				$name = $params[2];
 				$email = $params[3];
 				$mayorista = $params[4];
-				$group = $user;
+				$group = strtoupper($user.$params[5]);
 				//$group = $params[4];
 				
 				$n =$db->sql_numrows($db->sql_query("SELECT name FROM groups WHERE name='$group'"));
+				
 				if ($n != 0)
-					die("No se pudo crear la distribuidora por que ya existe otra con el nombre \"$new\"");
+					die("No se pudo crear la distribuidora por que ya existe otra con el nombre");
 				else
 				{
 					$modules = array("Bienvenida", "Gerente", "Noticias", "Directorio", "Campanas","Estadisticas");
@@ -225,7 +227,7 @@ EOBODY;*/
 					$id_nivel= $id_nivel + 0;
 					$tit='Básico';
 		
-	$msg =<<<EOBODY
+$msg =<<<EOBODY
 				<html>
 					<head>
 						<title>Claves de acceso para el gerente</title>
@@ -250,7 +252,7 @@ EOBODY;
 					$headers .= 'Content-Type: text/html; charset=iso-8859-1';
 					
 					mail( $email, "Alta de distribuidora", $msg, $headers);
-					//header("location: index.php?_module=Concesionarias");    
+					//header("location: index.php?_module=Concesionarias");   */ 
 				}
 				return $gid;
 			}
@@ -264,6 +266,7 @@ EOBODY;
 			$_dbuname = 'spl';
 			$_dbpass = 'spl';
 			$_dbname = 'spl';
+			
 			include("../../includes/db/mysql.php");
 			$db = new sql_db($_dbhost, $_dbuname, $_dbpass, $_dbname, false);
 			
@@ -291,7 +294,7 @@ EOBODY;
 				$sql = "SELECT * FROM  groups_accesses WHERE gid='$gid' AND module='Mayorista'";
 				$numro = $db->sql_numrows($db->sql_query($sql));
 				if ($numro < 1)
-					$db->sql_query("INSERT INTO group_accesses (gid, module) VALUES ('$gid','Mayorista')") or die("Error al editar permisos");
+					$db->sql_query("INSERT INTO groups_accesses (gid, module) VALUES ('$gid','Mayorista')") or die("Error al editar permisos");
 				return true;
 			}
 			else

@@ -62,7 +62,18 @@
 	  $db->sql_query($sql) or die($sql);
 	  $sql = "UPDATE crm_prospectos_unidades SET venta_confirmada='1' WHERE contacto_id='$c_id' AND modelo_id='$prod_id'";
 	  $db->sql_query($sql) or die($sql);
-	  return true;
+	  
+	  $sql = "SELECT l.id FROM crm_campanas_llamadas AS l, crm_contactos AS c
+	    WHERE l.contacto_id=c.contacto_id AND c.uid='$uid'  AND l.campana_id='$campana_id' AND l.status_id!=-1 AND c.contacto_id='$c_id' ORDER BY l.timestamp 1";
+	  $result = $db->sql_query($sql);
+				
+	  list($llamada_id) = htmlize($db->sql_fetchrow($result));
+
+	  
+	  $sql = "UPDATE crm_campanas_llamadas SET campana_id='$llamada_id', status_id='$status_id' WHERE id='$llamada_id' AND contacto_id='$c_id'";
+	  $db->sql_query($sql) or die("Error".print_r($db->sql_error()));
+	  
+	  return true;  
 	}
       }
       else

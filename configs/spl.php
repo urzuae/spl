@@ -1,6 +1,6 @@
 <?php
-$_dbuname = 'root';
-$_dbpass = 'redsox';
+$_dbuname = 'spl';
+$_dbpass = 'spl';
 $_dbname = 'spl';
 $_site_title = 'Sistema de Prospección de Licencias';
 $_theme = "Azul claro";

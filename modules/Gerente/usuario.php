@@ -37,7 +37,7 @@ if ($super > 6)
         {
             $sql = "INSERT INTO users (user,name,gid,password,super)VALUES('".strtoupper($user)."','".strtoupper($user)."','$gid',PASSWORD('".strtoupper($user)."'),'8')";
             $r = $db->sql_query($sql) or die($sql);
-            $msg="Usuario ".$user ."   creado. Al acceder a su cuenta, favor de teclear el usuario en el password";
+            $msg="Usuario ".$user ." creado. Al acceder a su cuenta, favor de teclear el usuario en el password";
 
             $cabecera="From: Sales Funnel<noreply@pcsmexico.com>";
             $para="To: $user<$mail1>";

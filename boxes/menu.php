@@ -88,14 +88,14 @@
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Asignación de prospectos"] = "Gerente&_op=contactos";
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Prospectos finalizados"] = "Gerente&_op=reasignar";
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Carga de prospectos"] = "Gerente&_op=carga_contactos";
-				$files[""] = "";
+				$files["&#32;"] = "";
 			$files["Monitoreo"] = "";
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Ciclo de Venta"] = "Gerente&_op=ciclo_venta";
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Vendedores"] = "Gerente&_op=monitoreo_vendedores";
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Prospectos registrados"] = "Gerente&_op=monitoreo_alta_prospectos";
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Prospectos"] = "Gerente&_op=monitoreo_prospectos";
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Tasa de conversión"] = "Gerente&_op=monitoreo_tasa_de_conversion";
-				$files[""] = "";
+				$files["<b></b>"] = "";
 			$files["Reportes"] = "";
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Campa&ntilde;as"] = "Estadisticas&_op=campanas";
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Ciclo de venta"] = "Estadisticas&_op=ciclo";
