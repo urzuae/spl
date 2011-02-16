@@ -101,9 +101,9 @@
                     alert("Ingrese un apellido");
                     return false;
                 }
-                if (f.tel_casa.value == '' && f.tel_oficina.value == '' && f.tel_movil.value == '' && f.tel_casa_2.value == '' && f.tel_oficina_2.value == '' && f.tel_movil_2.value == '' ) //&& f.tel_otro.value == ''
+                if (f.tel_casa.value == '')// && f.tel_oficina.value == '' && f.tel_movil.value == '' && f.tel_casa_2.value == '' && f.tel_oficina_2.value == '' && f.tel_movil_2.value == '' && f.tel_otro.value == ''
                 {
-                    alert("Ingrese por lo menos un teléfono");
+                    alert("Ingrese teléfono de contacto");
                     return false;
                 }
                 if (f.no_contactar.value == -1)
@@ -115,6 +115,11 @@
                 {
                     alert("Seleccione un origen para el contacto");
                     return false;
+                }
+                if (f.razon_social.value == '')
+                {
+                  alert("Ingrese nombre de compañia");
+                  return false;
                 }
                 if (f.listVehicle.selectedIndex == 0)
                 {
@@ -215,12 +220,14 @@
                         <td style="text-align: right; width:180px;">Titulo</td>
                         <td style="text-align: left; width:180px;"><input class="width100" size="10" name="titulo" value="$titulo" maxlength="32" onBlur="check_chars(this, 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz. ');caps1(this); "></td>
                     </tr>
+                    <!--
                     <tr class="row1">
                         <td style="text-align: right;">R. F. C.</td>
                         <td colspan="1"><input class="width100" name="rfc" value="$rfc" onBlur="caps1(this);check_chars(this, 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789-');check_min_length(this,10);analizar_rfc(this);"  maxlength="14"></td>
                         <td style="text-align: right;">Persona Moral</td>
                         <td colspan="1">$select_persona_moral</td>
                     </tr>
+                    
                     <tr class="row2">
                         <td style="text-align: right;">Fecha de nacimiento</td>
                         <td rowspan="1">
@@ -238,7 +245,7 @@
                         <td rowspan="1">
                             $select_edo_civil
                         </td>
-                    </tr>
+                    </tr>-->
                 </tbody><thead>
                    <tr>
                         <td colspan="4" rowspan="1"><img alt="" src="img/email.gif">Correo electr&oacute;nico</td>
@@ -265,7 +272,7 @@
                         <td colspan="2"><table class="width100"><tr><td>Ma&ntilde;ana</td><td>Tarde</td><td>Noche</td></tr></table></td>
                     </tr>
                     <tr class="row2">
-                        <td style="text-align: right;">Casa 1</td>
+                        <td style="text-align: right;">Contacto</td>
                         <td><input size="3" maxlength="3" name="lada1" value="$lada1" onblur="check_chars(this, '0123456789');">
                             <input size="20" maxlength="8" name="tel_casa" value="$tel_casa" onblur="check_chars(this, '0123456789');">
                             <input size="4" maxlength="8" name="ext_casa" value="$ext_casa" onblur="check_chars(this, '0123456789');">
@@ -276,6 +283,7 @@
                                 <td><input type="checkbox" name="horario_casa[3]" value="N" id="horario_casa_noche" $horario_casa_noche_checked></td>
                         </table></td>
                     </tr>
+                    <!--
                     <tr class="row1">
                         <td style="text-align: right;">Casa 2</td>
                         <td><input size="3" maxlength="3" name="lada_casa_2" value="$lada_casa_2" onblur="check_chars(this, '0123456789');">
@@ -340,12 +348,13 @@
                                 <td><input type="checkbox" name="horario_celular_2[2]" value="T" id="horario_celular_tarde" $horario_celular_tarde_checked_2></td>
                                 <td><input type="checkbox" name="horario_celular_2[3]" value="N" id="horario_celular_noche" $horario_celular_noche_checked_2></td>
                         </table></td>
-                    </tr>
-                </tbody>
+                    </tr>-->
+                </tbody><!--
                 <thead><tr>
                         <td colspan="4" rowspan="1"><img alt="" src="img/home.gif"> Domicilio</td>
                     </tr>
                 </thead> <tbody>
+                
                     <tr class="row1">
                         <td style="text-align: right;">Domicilio</td>
                         <td><input class="width100" name="domicilio" value="$domicilio" maxlength="40"></td>
@@ -368,7 +377,7 @@
                         <td style="text-align: right;">Entidad</td>
                         <td colspan="3" rowspan="1">$select_entidades<br>
                         </td>
-                    </tr>
+                    </tr>-->
                 </tbody>
                 <script>
                     function analizar_rfc(rfc)
@@ -387,15 +396,15 @@
                         }
                     }
                 </script><thead><tr>
-                       <td colspan="4" rowspan="1"><img alt="" src="img/more.gif"> Mas</td>
+                       <td colspan="4" rowspan="1"><img alt="" src="img/more.gif">Compañia</td>
                     </tr>
                 </thead> <tbody><tr class="row1">
                     <tr class="row1">
                         <td style="text-align: right;">Raz&oacute;n Social</td>
-                        <td><input name="razon_social" class="width100" type="text" value="$razon_social" size="10" maxlength="40" onBlur="check_chars(this, 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz1234567890. ');"></td>
-                        <td style="text-align: right;">Nombre de contacto</td>
-                        <td><input name="nombre_contacto"class="width100" type="text" value="$nombre_contacto" maxlength="40" size="10" onBlur="check_chars(this, 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz. ');"></td>
-                    </tr>
+                        <td><input name="razon_social" id="razon_social" class="width100" type="text" value="$razon_social" size="10" maxlength="40" onBlur="check_chars(this, 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz1234567890. ');"></td>
+                        <!--<td style="text-align: right;">Nombre de contacto</td>
+                        <td><input name="nombre_contacto"class="width100" type="text" value="$nombre_contacto" maxlength="40" size="10" onBlur="check_chars(this, 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz. ');"></td>-->
+                    </tr><!--
                     <tr class="row2">
                         <td style="text-align: right;">Compa&ntilde;ia</td>
                         <td><input class="width100" size="10" name="compania" value="$compania" maxlength="40" onBlur="check_chars(this, 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz1234567890  ');"></td>
@@ -409,7 +418,7 @@
                         <td>
                             <input name="ocupacion" value="$ocupacion" style="width:100%" maxlength="40" onBlur="check_chars(this, 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz1234567890 ');">
                         </td>
-                    </tr>
+                    </tr>-->
                     <tr class="row2">
                         <td style="text-align: right;">Primer Contacto</td>
                         <td><input type="text" name="primer_cont" id="primer_cont" value="$primer_cont" readonly><button type="reset" id="trigger"><img src="img/calendar.gif" /></button></td>

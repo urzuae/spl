@@ -24,16 +24,16 @@ document.objeciones.objecion.value = obj;
 function show_popup(text)
 {
 
-var objecion_bak = document.objeciones.objecion.value;
+//var objecion_bak = document.objeciones.objecion.value;
 
-document.objeciones.objecion.value = text;
+//document.objeciones.objecion.value = text;
 
-var objs = document.getElementById('bts_objeciones');
+/*var objs = document.getElementById('bts_objeciones');
 var bts_obj_bak = objs.innerHTML;
 objs.innerHTML = "<input class='button' type='button' value='Regresar' "
                  + "onclick='document.objeciones.objecion.value=document.objeciones.obj_bak.value; show_obj_bt("+document.objeciones.obj_padre.value+");'"
                  + ">&nbsp;";
-
+*/
 }
 
 //titulos
@@ -47,12 +47,12 @@ var array_padres = Array();
 $js_padres
 function show_obj_bt(objecion_padre)
 {
-var objs = document.getElementById('bts_objeciones');
+//var objs = document.getElementById('bts_objeciones');
 var i = 0;
 var titulo, objecion, id;
-document.objeciones.obj_padre.value = objecion_padre;
-document.objeciones.obj_bak.value = document.objeciones.objecion.value;
-objs.innerHTML = "";
+//document.objeciones.obj_padre.value = objecion_padre;
+//document.objeciones.obj_bak.value = document.objeciones.objecion.value;
+//objs.innerHTML = "";
 if (array_padres[objecion_padre + '-0'] == undefined) //este no tiene hijos
 objecion_padre = "0";
 while (array_padres[objecion_padre +'-'+i] != undefined)
@@ -68,7 +68,7 @@ i++;
 }
 $js_extra
 </script></head>
-<body onload="show_obj_bt('0');startList();" leftmargin="0" topmargin="0">
+<body onload="show_obj_bt('0');" leftmargin="0" topmargin="0">
 
 
 
@@ -95,19 +95,19 @@ $extra_objeciones
 	<table class="width100" border="0" cellpadding="2" cellspacing="0">
 		<tbody>
 			<tr class="row1"><td align="right" style="width:100px;font-weight:bold;"><span style='background-color:$color_semaforo'>&nbsp;&nbsp;&nbsp;</span>&nbsp;Nombre</td><td style="width:250px;" >$nombre $apellido_paterno $apellido_materno</td><td>Mañ-Tar-Noc</td></tr>
-			<tr class="row1"><td align="right" style="width:100px;font-weight:bold;"><span style='background-color:$color_semaforo'>&nbsp;&nbsp;&nbsp;</span>&nbsp;Compañia</td><td style="width:250px;" >$compania</td><td></td>
+			<tr class="row1"><td align="right" style="width:100px;font-weight:bold;"><span style='background-color:$color_semaforo'>&nbsp;&nbsp;&nbsp;</span>&nbsp;Compañia</td><td style="width:250px;" >$razon_social</td><td></td>
 			<tr class="row2"><td align="right" style="font-weight:bold;">Tel. Casa 1</td><td>$tel_casa </td><td>$horario_preferido_casa</td></tr>
 			<tr class="row1"><td align="right" style="font-weight:bold;">Tel. Móvil 1</td><td>$tel_movil </td><td>$horario_preferido_movil</td></tr>
 			<tr class="row2"><td align="right" style="font-weight:bold;">Tel. Oficina 1</td><td>$tel_oficina </td><td>$horario_preferido_oficina</td></tr>
 
-			<tr class="row1"><td align="right" style="font-weight:bold;">Tel. Casa 2</td><td>$tel_casa_2 </td><td>$horario_preferido_casa_2</td></tr>
+			<!--<tr class="row1"><td align="right" style="font-weight:bold;">Tel. Casa 2</td><td>$tel_casa_2 </td><td>$horario_preferido_casa_2</td></tr>
 			<tr class="row2"><td align="right" style="font-weight:bold;">Tel. Móvil 2</td><td>$tel_movil_2 </td><td>$horario_preferido_movil_2</td></tr>
-			<tr class="row1"><td align="right" style="font-weight:bold;">Tel. Oficina 2</td><td>$tel_oficina_2 </td><td>$horario_preferido_oficina_2</td></tr>
+			<tr class="row1"><td align="right" style="font-weight:bold;">Tel. Oficina 2</td><td>$tel_oficina_2 </td><td>$horario_preferido_oficina_2</td></tr>-->
 
-			<tr class="row2"><td align="right" style="font-weight:bold;">email</td><td colspan="2">$email</td></tr>
-			<tr class="row1"><td align="right" style="font-weight:bold;">C&oacute;digo de Campa&ntilde;a</td><td colspan="2">$codigo_campana</td></tr>
-			<tr class="row2"><td align="right"> 	</td><td>
-			<a href="#" onclick="window.open('index.php?_module=Directorio&_op=contacto&contacto_id=$contacto_id&close_after=1', 'contacto');">Editar Contacto</a>
+			<tr class="row1"><td align="right" style="font-weight:bold;">email</td><td colspan="2">$email</td></tr>
+			<tr class="row2"><td align="right" style="font-weight:bold;">C&oacute;digo de Campa&ntilde;a</td><td colspan="2">$codigo_campana</td></tr>
+			<tr class="row1"><td align="right"> 	</td><td>
+			<a href="#" onclick="window.open('index.php?_module=Directorio&_op=editar&contacto_id=$contacto_id&close_after=1', 'contacto');">Editar Contacto</a>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<!--<a href="#" onclick="window.open('index.php?_module=Directorio&_op=mini_contacto&origen_contacto_id=$contacto_id&contacto_id=0&close_after=1&campana_id=$campana_id&origen_id=$origen_id', '','location=no,resizable=yes,scrollbars=yes,navigation=no,titlebar=no,directories=no,width=500,height=300,left=0,top=0,alwaysraised=yes');">Alta de Contacto</a></td><td>&nbsp;</td></tr>-->
 		</tbody></table> 

@@ -314,7 +314,7 @@ if ($fecha_cita == "0000-00-00 00:00:00") $fecha_cita = "";
 $sql = "SELECT nombre, apellido_paterno, apellido_materno,tel_casa, tel_oficina,tel_movil, tel_otro,nota,
         email, origen_id,tel_casa_2,tel_oficina_2,tel_movil_2,horario_preferido_casa,horario_preferido_oficina,
         horario_preferido_movil,horario_preferido_casa_2,horario_preferido_oficina_2,horario_preferido_movil_2,
-        codigo_campana,fecha_autorizado,fecha_firmado
+        codigo_campana,fecha_autorizado,fecha_firmado, razon_social
         FROM crm_contactos WHERE contacto_id='$contacto_id' LIMIT 1";
 
 $result = $db->sql_query($sql) or die("Error al consultar datos del contacto");
@@ -322,7 +322,7 @@ global $nombre, $apellido_paterno, $apellido_materno;
 list($nombre, $apellido_paterno, $apellido_materno,$tel_casa, $tel_oficina,$tel_movil, $tel_otro,$nota, $email,
      $origen_id,$tel_casa_2, $tel_oficina_2, $tel_movil_2,$horario_preferido_casa, $horario_preferido_oficina,
      $horario_preferido_movil,$horario_preferido_casa_2, $horario_preferido_oficina_2, $horario_preferido_movil_2,
-     $codigo_campana,$fecha_autorizado,$fecha_firmado) = htmlize($db->sql_fetchrow($result));
+     $codigo_campana,$fecha_autorizado,$fecha_firmado, $razon_social) = htmlize($db->sql_fetchrow($result));
 
     $objeto= new Fecha_autorizado ($db,$fecha_autorizado,$fecha_firmado);
     $color_semaforo=$objeto->Obten_Semaforo();
@@ -447,7 +447,7 @@ list($nombre, $apellido_paterno, $apellido_materno,$tel_casa, $tel_oficina,$tel_
 //cambiamos el saludo para mostrar variables
 //SALUDO Y OBJECIONES
 //dependiendo de la actividad de venta
-global $campana_id_objeciones;
+/*global $campana_id_objeciones;
 if ($ciclo_de_venta_id && $ciclo_de_venta!=1) //si envian una opción de ciclo de ventas, es que están cambiando en la etapa del ciclo de ventas, lo cual
 {//como no se ha consultado la DB y llenado este campo, si existe es que lo mandaron por POST
   $campana_id_objeciones = -$ciclo_de_venta_id; //las campañas coinciden
@@ -459,7 +459,7 @@ else
 
 //SALUDO
 $sql = "SELECT saludo FROM crm_campanas WHERE campana_id='$campana_id_objeciones'";
-list($saludo) = htmlize($db->sql_fetchrow($db->sql_query($sql)));
+list($saludo) = htmlize($db->sql_fetchrow($db->sql_query($sql)));*/
 global $username;
 list($username) = htmlize($db->sql_fetchrow($db->sql_query("SELECT name FROM users WHERE uid='$uid' LIMIT 1")));;
 if ($campana_id == -1)
@@ -559,12 +559,12 @@ if($db->sql_numrows($res) > 0)
 {
     $catalogo .= "<table width=\"100%\" height=\"25px\"><th><b>Catálogo</b></th></table>";
     $catalogo .= "\n<ul id=nav>\n";
-    while(list($unidad_id,$url,$nombre) = $db->sql_fetchrow($res))
+    while(list($unidad_id,$url,$nombre_u) = $db->sql_fetchrow($res))
     {
         if($url!='#')
-            $catalogo .= "<li><a href='".$url."' target='vw_com'>".$nombre."</a></li>";
+            $catalogo .= "<li><a href='".$url."' target='vw_com'>".$nombre_u."</a></li>";
         else
-            $catalogo .= "<li>".$nombre."</li>";
+            $catalogo .= "<li>".$nombre_u."</li>";
     }
     $catalogo .= "</ul>\n<br>\n";
 }

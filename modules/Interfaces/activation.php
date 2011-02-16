@@ -42,42 +42,43 @@
       
       /*$params = array();
       foreach ($param as $key=>$value)
-	$params[] = $value;*/
+			$params[] = $value;*/
 	
       //$key=$params[0];
       $key = $param;
       
+			return false;
+			
       $sql = "SELECT venta_confirmada, modelo_id, contacto_id FROM crm_prospectos_ventas WHERE chasis='$key'";
       $result = $db->sql_query($sql) or die($sql);
       
       if (list($vta_conf, $prod_id, $c_id) = $db->sql_fetchrow($result))
       {
-	if ($vta_conf == 1)
-	  return false;
-	else
-	{
-	  $sql = "SELECT modelo FROM crm_unidades WHERE unidad_id ='$prod_id'";
-	  list($product) = $db->sql_fetchrow($db->sql_query($sql));
-	  $sql = "UPDATE crm_prospectos_ventas SET venta_confirmada='1' WHERE chasis='$key'";
-	  $db->sql_query($sql) or die($sql);
-	  $sql = "UPDATE crm_prospectos_unidades SET venta_confirmada='1' WHERE contacto_id='$c_id' AND modelo_id='$prod_id'";
-	  $db->sql_query($sql) or die($sql);
-	  
-	  $sql = "SELECT l.id FROM crm_campanas_llamadas AS l, crm_contactos AS c
-	    WHERE l.contacto_id=c.contacto_id AND c.uid='$uid'  AND l.campana_id='$campana_id' AND l.status_id!=-1 AND c.contacto_id='$c_id' ORDER BY l.timestamp 1";
-	  $result = $db->sql_query($sql);
-				
-	  list($llamada_id) = htmlize($db->sql_fetchrow($result));
-
-	  
-	  $sql = "UPDATE crm_campanas_llamadas SET campana_id='$llamada_id', status_id='$status_id' WHERE id='$llamada_id' AND contacto_id='$c_id'";
-	  $db->sql_query($sql) or die("Error".print_r($db->sql_error()));
-	  
-	  return true;  
-	}
+				if ($vta_conf == 1)
+					return false;
+				else
+				{
+					$sql = "SELECT modelo FROM crm_unidades WHERE unidad_id ='$prod_id'";
+					list($product) = $db->sql_fetchrow($db->sql_query($sql));
+					$sql = "UPDATE crm_prospectos_ventas SET venta_confirmada='1' WHERE chasis='$key'";
+					$db->sql_query($sql) or die($sql);
+					$sql = "UPDATE crm_prospectos_unidades SET venta_confirmada='1' WHERE contacto_id='$c_id' AND modelo_id='$prod_id'";
+					$db->sql_query($sql) or die($sql);
+					
+					$sql = "SELECT l.id FROM crm_campanas_llamadas AS l, crm_contactos AS c
+						WHERE l.contacto_id=c.contacto_id AND c.uid='$uid'  AND l.campana_id='$campana_id' AND l.status_id!=-1 AND c.contacto_id='$c_id' ORDER BY l.timestamp 1";
+					$result = $db->sql_query($sql);
+							
+					list($llamada_id) = htmlize($db->sql_fetchrow($result));			
+					
+					$sql = "UPDATE crm_campanas_llamadas SET campana_id='$llamada_id', status_id='$status_id' WHERE id='$llamada_id' AND contacto_id='$c_id'";
+					$db->sql_query($sql) or die("Error".print_r($db->sql_error()));
+					
+					return true;  
+				}
       }
       else
-	return false;
+				return false;
     }
   }
   

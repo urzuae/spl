@@ -192,7 +192,7 @@ if (isset($_COOKIE['_uid']))
         list($_default_module) = $db->sql_fetchrow($result);
         
 }
-//else $uid = 0;
+else $uid = "";
 $__uid = $uid;
 $_themedir = "themes/";
 $_imgdir = "img";

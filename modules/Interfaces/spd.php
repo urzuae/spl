@@ -167,8 +167,8 @@ EOBODY;*/
 				$name = $params[2];
 				$email = $params[3];
 				$mayorista = $params[4];
-				$group = strtoupper($user.$params[5]);
-				//$group = $params[4];
+				//$group = strtoupper($user.$params[5]);
+				$group = $params[5];
 				
 				$n =$db->sql_numrows($db->sql_query("SELECT name FROM groups WHERE name='$group'"));
 				
