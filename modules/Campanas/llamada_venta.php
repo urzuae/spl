@@ -21,7 +21,7 @@ $buffer="El contacto no tiene productos asociados";
 
 // Consulta la tabla para sacar los modelos seleccionados por el prospecto
 $sql="SELECT modelo,modelo_id,version_id,transmision_id,timestamp, venta_confirmada
-      FROM crm_prospectos_unidades WHERE contacto_id='".$contacto_id."' order by timestamp;";
+      FROM crm_prospectos_unidades WHERE contacto_id='".$contacto_id."' order by timestamp";
 $res=$db->sql_query($sql) or die("Error: En la consulta de n modelos por prospecto:  ".$sql);
 if($db->sql_numrows($res) > 0)
 {
@@ -29,9 +29,8 @@ if($db->sql_numrows($res) > 0)
               <th width='12%'>SubCategoria</th>
               <th width=' 5%'>Versi&oacute;n</th>*/
 
-        $buffer=
-          "<table width='99%' align='center'>
-            <thead><tr bgcolor='#cdcdcd'>
+        $buffer="
+            <tr bgcolor='#cdcdcd'>
               <th width='12%'>Modelo</th>
               <th width=' 9%'>No Serie</th>
               <th width=' 9%'>No Licencias</th>
@@ -40,7 +39,7 @@ if($db->sql_numrows($res) > 0)
         {
             $buffer.="<th width=' 9%'></th><th width=' 9%'></th>";
         }
-        $buffer.="</tr></thead><tbody>";
+        $buffer.="</tr>";
         $distintivo=0;
         while(list($modelo,$modelo_id,$version_id,$transmision_id,$timestamp,$venta_conf) = $db->sql_fetchrow($res))
         {
@@ -48,6 +47,7 @@ if($db->sql_numrows($res) > 0)
             $tmp_name_precio="precio".$contacto_id.$modelo_id.$version_id.$transmision_id.$distintivo;
             $boton="b".$contacto_id.$modelo_id.$version_id.$transmision_id.$distintivo;
             $venta_registrada=Busca_en_ventas($db,$contacto_id,$modelo_id,$version_id,$transmision_id,$timestamp);
+            $ventas = Busca_en_ventas_extra($db,$contacto_id,$modelo_id,$version_id,$transmision_id);
             $read='';
             if(count($venta_registrada)>0)
                 $read='Readonly';
@@ -55,11 +55,13 @@ if($db->sql_numrows($res) > 0)
             /*<td>".busca_datos($db,'crm_versiones',' version_id',$version_id)."</td>
             <td>".busca_datos($db,'crm_transmisiones',' transmision_id',$transmision_id)."</td>
             <td>".$ano."</td>*/
-
+            while($venta_registrada = $db->sql_fetchrow($ventas))
+            {
+            print_r($venta_registrada);
             $buffer.="<tr>
             <td>".busca_datos($db,'crm_unidades',' unidad_id',$modelo_id)."</td>
-            <td><input type='text' size='12' name='$tmp_name_chasis' id='$tmp_name_chasis' value='".$venta_registrada['chasis']."' maxlength='17' $read></td>
-            <td><input type='text' size='12' name='$tmp_name_precio' id='$tmp_name_precio' value='".$venta_registrada['precio']."' onblur='this.value = this.value;' $read></td>";
+            <td><input type='text' size='12' name='$tmp_name_chasis' id='$tmp_name_chasis' value='".$venta_registrada['chasis']."' maxlength='17' readonly='readonly' onchange='verifica_existencia(this, null)'></td>
+            <td><input type='text' size='12' name='$tmp_name_precio' id='$tmp_name_precio' value='".$venta_registrada['precio']."' onblur='this.value = this.value;' disabled='disabled'></td>";
             if(count($venta_registrada) == 0)
             {
                 $timestamp_vta='';
@@ -81,9 +83,10 @@ if($db->sql_numrows($res) > 0)
             }
             $buffer.="</tr>";
             $distintivo++;
+            }
     }
-    $buffer.="</table><br><center><div id='valida' style='color:#ff0000;font-size:14px;font-weigth:bold;'></div></center><br>";
-    $buffer.="<center><br><input type='button' name='cerrar' value='Cerrar Ventana' onclick=\"self.close();window.opener.location.href='".$url."'\"></center>";
+    $valida= "<br><center><div id='valida' style='color:#ff0000;font-size:14px;font-weigth:bold;'></div></center><br>";
+    $boton_cerrar="<center><br><input type='button' name='cerrar' value='Cerrar Ventana' onclick=\"self.close();window.opener.location.href='".$url."'\"></center>";
 }
 
 function Busca_en_ventas($db,$contacto_id,$modelo_id,$version_id,$transmision_id,$timestamp)
@@ -97,6 +100,19 @@ function Busca_en_ventas($db,$contacto_id,$modelo_id,$version_id,$transmision_id
         $array=$db->sql_fetchrow($res_vtas);
     }
     return $array;
+}
+function Busca_en_ventas_extra($db,$contacto_id,$modelo_id,$version_id,$transmision_id)
+{
+    //$array = array();
+    $sql_vtas="SELECT chasis,precio,timestamp FROM crm_prospectos_ventas WHERE contacto_id=".$contacto_id." AND
+          modelo_id=".$modelo_id;
+    $res_vtas=$db->sql_query($sql_vtas);
+    if($db->sql_numrows($res_vtas)> 0)
+    {
+      return $res_vtas;
+    }
+    else
+      return false;
 }
 function busca_datos($db,$tabla,$campo,$valor)
 {

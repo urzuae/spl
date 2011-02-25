@@ -1,32 +1,22 @@
 <?php
+		
+  require_once("themes/lib/nusoap.php");
+  
+  $dist_id=$_POST['key'];
+  //$dist_id = 587;
 
-$_dbhost = 'localhost';
-$_dbuname = 'root';
-$_dbpass = 'redsox';
-$_dbname = 'spd';
-$db = connect($_dbhost, $_dbuname, $_dbpass, $_dbname);
+  $cadena = $dist_id;
+  
+  $act_client = new nusoap_client ('http://10.0.0.181/server.php?wsdl', true);
+  $dak = $act_client->call('revision', array('param'=>$cadena));
 
-# cadena.php en servidor remoto
-/*$data = array(0 => "47,78,1,0,asdas",
-    1 => "47,78,2,0,asdasd",
-    2=>"47,78,3,0,454545",
-    3 => "47,78,4,0,asda@adsd.com",
-    4=>"47,78,5,0,asdasd");*/
-
-if (isset($_POST['data']))
-{
-  echo 1;
-}
-else
-{
-  echo 0;
-}
-
-function connect($_dbhost, $_dbuname, $_dbpass, $_dbname)
-{
-  include("includes/db/mysql.php");
-  $_dbtype = 'MySQL';
-  $db = new sql_db($_dbhost, $_dbuname, $_dbpass, $_dbname, false);
-  return $db;
-}
+	if($dak)
+	{
+		echo $dak;
+	}
+	else
+	{
+		echo "";
+	}
+  
 ?>

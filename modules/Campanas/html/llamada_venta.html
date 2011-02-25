@@ -16,6 +16,11 @@ var nom_modelo;
 var boton_g;
 var chasis_g;
 var precio_g;
+var count=0;
+var contact_id = $contacto_id;
+var user_id = $uid;
+var model_id = 1;
+var model = "SALES FUNNEL";
 function validate(f)
 {
 	if (f.chasis.value == "")
@@ -68,7 +73,47 @@ function procesarVentasEliminadasVendedores()
     }
 }
 
-function concreta_venta(modelo,contacto_id,modelo_id,version_id,transmision_id,timestamp,chasis,precio,uid,boton)
+function verifica_existencia(f, id_param)
+{ 
+  var url = "cadena.php";
+  var key = f.value;
+  if(key.length > 0)
+  {
+    conexion_vta = crearXMLHttpRequest();
+    conexion_vta.onreadystatechange = function() {procesarValidacion(id_param)};
+    conexion_vta.open('POST', url, true);
+    conexion_vta.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    conexion_vta.send("key="+key);
+  }
+  else
+    alert("Favor de especificar el no de serie y el precio");  
+}
+
+function procesarValidacion(param)
+{
+  result_vta= document.getElementById("valida");
+  param = (param == null)? '$tmp_name_precio': param;
+  console.log(param)
+  console.log(conexion_vta.readyState)
+	if(conexion_vta.readyState == 4)
+	{
+		if(conexion_vta.responseText != "")
+    {
+      console.log(param)
+      document.getElementById(param+2).value = conexion_vta.responseText;
+      document.getElementById(param).disabled = "";
+      result_vta.innerHTML = "Licencia Existente";
+    }
+    else
+    {
+      result_vta.innerHTML = "Licencia No Existente pruebe otra";
+      document.getElementById(param).disabled = "disabled";
+    }
+	}
+	else
+		result_vta.innerHTML = 'Procesando.....';
+}
+function concreta_venta(modelo,contacto_id,modelo_id,version_id,transmision_id,timestamp,chasis,precio,uid, boton)
 {
     boton_g=boton;
     chasis_g=chasis;
@@ -85,43 +130,35 @@ function concreta_venta(modelo,contacto_id,modelo_id,version_id,transmision_id,t
             if(confirm('Esta seguro de registrar la venta del producto: '+modelo))
             {
             	conexion_vta=crearXMLHttpRequest();
-                conexion_vta.onreadystatechange = procesarVentas;
-                conexion_vta.open('POST',urlventa, true);
-                conexion_vta.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                conexion_vta.send("contacto_id="+contacto_id+"&modelo="+modelo+"&modelo_id="+modelo_id+"&version_id="+version_id+"&transmision_id="+transmision_id+"&fecha="+timestamp+"&chasis="+chasis_f+"&precio="+precio_f+"&uid="+uid);
+              conexion_vta.onreadystatechange = procesarVentas;
+              conexion_vta.open('POST',urlventa, true);
+              conexion_vta.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+              conexion_vta.send("contacto_id="+contacto_id+"&modelo="+modelo+"&modelo_id="+modelo_id+"&version_id="+version_id+"&transmision_id="+transmision_id+"&fecha="+timestamp+"&chasis="+chasis_f+"&precio="+precio_f+"&uid="+uid);
             }
         }
     }
     else
-    {
-        alert("Favor de especificar el no de serie y el precio");
-    }
+      alert("Favor de especificar el no de serie y el precio");
 }
 function procesarVentas()
 {
-    var result_vta='';
+  var result_vta='';
 	if(conexion_vta.readyState == 4)
 	{
-         result_vta= document.getElementById("valida");
+    result_vta= document.getElementById("valida");
 		if(conexion_vta.responseText=="Venta Registrada")
 		{
-            result_vta.innerHTML = "Venta Registrada del producto:  "+nom_modelo;
-            window.document.getElementById(boton_g).style.display="none";
-            window.document.getElementById(chasis_g).readOnly=true;
-            window.document.getElementById(precio_g).readOnly=true;
-
-            //btn=document.getElementById(boton_g).value;
-            //alert(btn);
+      result_vta.innerHTML = "Venta Registrada del producto:  "+nom_modelo;
+      window.document.getElementById(boton_g).style.display="none";
+      document.getElementById(boton_g).parentNode.innerHTML = "Licencia Registrada";
+      window.document.getElementById(chasis_g).readOnly=true;
+      window.document.getElementById(precio_g).readOnly=true;
 		}
-        else
-        {
-            result_vta.innerHTML = conexion_vta.responseText;
-        }
+    else
+      result_vta.innerHTML = conexion_vta.responseText;
 	}
 	else
-	{
 		result_vta.innerHTML = 'Procesando.....';
-	}
 }
 
 /*function addEvent(elemento,nomevento,funcion,captura)
@@ -141,6 +178,8 @@ function procesarVentas()
       return false;
 }
 */
+
+
 function crearXMLHttpRequest()
 {
   var xmlHttp=null;
@@ -151,6 +190,88 @@ function crearXMLHttpRequest()
       xmlHttp = new XMLHttpRequest();
   return xmlHttp;
 }
+  function concreta_venta_extra(id)
+  {
+    console.log(id)
+    console.log(id+2)
+    var chasis_f = $('#'+id+1).attr('id');
+    var precio_f = $('#'+id+2).attr('id');
+    concreta_venta(model, contact_id, model_id, 1, 0, new Date(), chasis_f, precio_f, user_id, id);
+  }
+
+</script>
+<script src="themes/jquery/jquery.js"></script>
+<script>
+$(function () {
+  $('.add_license').live('onclick', function () {
+  concreta_venta_extra(this.id)
+  });
+  /*$().live('onchange', function())
+  {
+    verifica_existencia(this));
+  }*/
+});
+  function add_license()
+  {
+  id_tr = "tr"+count;
+  id_td = id_tr+"td";
+  id_input = id_tr+"input";
+  var trTag = document.createElement("tr");
+  trTag.id = id_tr;
+  trTag.setAttribute("align","left");
+  trTag.style.margin = "0px auto";
+  document.getElementById('forma').appendChild(trTag);
+
+  var td_prod = document.createElement("td");
+  td_prod.innerHTML = "SALES FUNNEL";
+  document.getElementById(id_tr).appendChild(td_prod);
+
+  var tdTag = document.createElement("td");
+  tdTag.id = id_td+1;
+  tdTag.setAttribute("align","left");
+  tdTag.style.margin = "0px auto";
+  document.getElementById(id_tr).appendChild(tdTag);
+
+  var tdTag = document.createElement("td");
+  tdTag.id = id_td+2;
+  tdTag.setAttribute("align","left");
+  tdTag.style.margin = "0px auto";
+  document.getElementById(id_tr).appendChild(tdTag);
+
+  var tdTag = document.createElement("td");
+  tdTag.id = id_td+3;
+  tdTag.setAttribute("align","center");
+  tdTag.style.margin = "0px auto";
+  document.getElementById(id_tr).appendChild(tdTag);
+  
+  var inputTag = document.createElement("input");
+  inputTag.id = id_input+1;
+  inputTag.setAttribute("type", "text");
+  inputTag.setAttribute("onchange", "verifica_existencia(this, id_input)");
+  inputTag.setAttribute("maxlength","17");
+  inputTag.setAttribute("size","12");
+  document.getElementById(id_td+1).appendChild(inputTag);
+  
+  var inputTag2 = document.createElement("input");
+  inputTag2.id = id_input+2;
+  inputTag2.setAttribute("type", "text");
+  inputTag2.setAttribute("maxlength","17");
+  inputTag2.setAttribute("size","12");
+  inputTag2.setAttribute("disabled","disabled");
+  document.getElementById(id_td+2).appendChild(inputTag2);
+  
+  var buttonTag = document.createElement("input");
+  buttonTag.id = id_input;
+  buttonTag.setAttribute("class", "add_license");
+  buttonTag.setAttribute("type", "button");
+  buttonTag.setAttribute("value", "Registra");
+  buttonTag.setAttribute("onclick", "concreta_venta_extra(this.id, id_input+2)");
+  buttonTag.setAttribute("disabled","disabled");
+  document.getElementById(id_td+3).appendChild(buttonTag);
+  
+  alert("Add license");
+  count++;
+}
 
 </script>
 <form action="index.php" name="objeciones" method="post" onsubmit="return validate(this)">
@@ -159,10 +280,10 @@ function crearXMLHttpRequest()
 <input name="campana_id" value="$campana_id" type="hidden">
 <input name="contacto_id" value="$contacto_id" type="hidden">
 <input name="llamada_id" value="$llamada_id" type="hidden">
-<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2"> <tbody> 
-<tr align="center"> <th>Venta</th></tr>
-<tr class="row1">
-  <td>
-      $buffer
-  </td>
-</tbody></table></form></body></html>
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2" name='forma' id='forma'>
+<tr align="center"> <th colspan="4" style="font-size:14px;">Venta<input type='button' name='add_lic' id='add_lic' value=' + Add License' onclick='add_license();' style="float:right; padding:0px 2px; " /></th></tr>
+$buffer
+</table></form>
+$valida
+$boton_cerrar
+</body></html>
