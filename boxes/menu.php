@@ -51,7 +51,7 @@
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Prospectos finalizados"] = "Gerente&_op=reasignar";
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Carga de prospectos"] = "Gerente&_op=carga_contactos";
 				$files["&#32;"] = "";
-			$files["Monitoreo"] = "";
+			/*$files["Monitoreo"] = "";
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Ciclo de Venta"] = "Gerente&_op=ciclo_venta";
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Vendedores"] = "Gerente&_op=monitoreo_vendedores";
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Prospectos registrados"] = "Gerente&_op=monitoreo_alta_prospectos";
@@ -60,7 +60,7 @@
 				$files["<b></b>"] = "";
 			$files["Reportes"] = "";
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Campa&ntilde;as"] = "Estadisticas&_op=campanas";
-				$files["&nbsp;&nbsp;&nbsp;&nbsp;Ciclo de venta"] = "Estadisticas&_op=ciclo";
+				$files["&nbsp;&nbsp;&nbsp;&nbsp;Ciclo de venta"] = "Estadisticas&_op=ciclo";*/
     }
     elseif($super == 8)
     {
@@ -89,7 +89,7 @@
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Prospectos finalizados"] = "Gerente&_op=reasignar";
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Carga de prospectos"] = "Gerente&_op=carga_contactos";
 				$files["&#32;"] = "";
-			$files["Monitoreo"] = "";
+			/*$files["Monitoreo"] = "";
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Ciclo de Venta"] = "Gerente&_op=ciclo_venta";
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Vendedores"] = "Gerente&_op=monitoreo_vendedores";
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Prospectos registrados"] = "Gerente&_op=monitoreo_alta_prospectos";
@@ -99,13 +99,13 @@
 			$files["Reportes"] = "";
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Campa&ntilde;as"] = "Estadisticas&_op=campanas";
 				$files["&nbsp;&nbsp;&nbsp;&nbsp;Ciclo de venta"] = "Estadisticas&_op=ciclo";
-				$files[""] = "";
-			if($id_mayorista == $gid)
+				$files[""] = "";*/
+			/*if($id_mayorista == $gid)
 			{
 				$files[""] = "";
 				$files["Distribuidores"] = "";
 					$files["&nbsp;&nbsp;&nbsp;&nbsp;Distribuidores"] = "Mayorista";
-			}
+			}*/
 		}
 		else
 		{
