@@ -3,7 +3,7 @@
     die ("No puedes acceder directamente a este archivo...");
 }
 
-global $db, $uid, $submit, $user, $name, $password, $password2,$email;
+global $db, $uid, $submit, $user, $name, $password, $password2,$email, $nombre;
 $sql  = "SELECT gid, super FROM users WHERE uid='$uid'";
 $result = $db->sql_query($sql) or die("Error");
 list($gid, $super) = $db->sql_fetchrow($result);
@@ -17,6 +17,7 @@ list($gid, $super) = $db->sql_fetchrow($result);
   list($gid, $user_orig, $name_orig) = $db->sql_fetchrow($result);
   if ($password)
   {
+
     if ($password != $password2)
     {
       $msg .= "Los passwords no coinciden";
@@ -34,7 +35,7 @@ list($gid, $super) = $db->sql_fetchrow($result);
       else //ahora si, actualizar
       {*/
         $password = strtoupper($password);
-        $sql = "UPDATE users set password=PASSWORD('$password'), name='$name', email='$email' WHERE uid='$uid'";
+        $sql = "UPDATE users set password=PASSWORD('$password'), name='$nombre', email='$email' WHERE uid='$uid'";
         $r = $db->sql_query($sql) or die($sql);
         header("location:index.php");
 //       }
