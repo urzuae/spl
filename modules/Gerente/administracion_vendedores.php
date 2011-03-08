@@ -4,7 +4,7 @@
     die ("No puedes acceder directamente a este archivo...");
 }
 global $db, $user, $uid, $submit,$_site_title;
-$_site_title = "Permisos de vendedores";
+$_site_title = "Permisos de vendedores-SFG0002";
 $sql  = "SELECT gid, super FROM users WHERE uid='$uid'";
 $result = $db->sql_query($sql) or die("Error");
 list($gid, $super) = $db->sql_fetchrow($result);
@@ -56,10 +56,10 @@ else
 		 $checkedv = "CHECKED=\"CHECKED\"";
 
 		$users .= "<tr class=\"row".($rowclass++%2+1)."\">
-		    <td>$uid</td>
-                    <td>$user</td>
-                    <td><input type=\"checkbox\" name=\"editcontact_$uid\" $checked2></td>
-                    <td><input type=\"checkbox\" name=\"editventa_$uid\" $checkedv></td>
+		    <td class='tdleft'>$uid</td>
+                    <td class='tdleft'>$user</td>
+                    <td class='tdcenter'><input type=\"checkbox\" name=\"editcontact_$uid\" $checked2></td>
+                    <td class='tdcenter'><input type=\"checkbox\" name=\"editventa_$uid\" $checkedv></td>
                    </tr>";
 	}
 }

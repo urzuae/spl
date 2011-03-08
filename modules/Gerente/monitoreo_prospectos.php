@@ -5,9 +5,10 @@ if (!defined('_IN_MAIN_INDEX'))
 }
 
 global $db, $how_many, $from, $campana_id, $nombre, $apellido_paterno, $apellido_materno,
-       $submit, $status_id, $ciclo_de_venta_id, $uid, $orderby, $rsort, $open,$_dbhost,$_site_name;
+       $submit, $status_id, $ciclo_de_venta_id, $uid, $orderby, $rsort, $open,$_dbhost,$_site_name, $_site_title;
 
 include_once($_includesdir."/Genera_Excel.php");
+$_site_title = "Monitoreo de prospectos-SFG0013";
 $sql  = "SELECT gid, super FROM users WHERE uid='".$_COOKIE['_uid']."'";
 $result = $db->sql_query($sql) or die("Error");
 list($gid, $super) = $db->sql_fetchrow($result);
@@ -58,27 +59,27 @@ if ( (count($campanasNombre) > 0) )
         $icono_bloque = "more";
         $contador_tablas++;
         $tabla_campanas .=
-        "<table style=\"text-align: left; width: 100%;\" border=\"0\" cellpadding=\"2\" cellspacing=\"2\"> <tbody>
-        <tr style=\"cursor:pointer\" onclick=\"var v=document.getElementById('bloque_$uid_$valor[campanaId]');	var i=document.getElementById('img_$uid_$valor[campanaId]'); var o=document.getElementById('open');	if(v.style.display=='none'){v.style.display='block';i.src='img/less.gif';o.value = o.value+'$valor[campanaId]'+'-';}else{ v.style.display='none';i.src='img/more.gif';o.value = o.value.replace('$valor[campanaId] ','')}\">
-        <th><img src=\"img/pixel.gif\" width=\"15px\"><img src=\"img/$icono_bloque.gif\" id=\"img_$uid_$valor[campanaId]\"> $valor[campana]</th>
+        "<table width='100%' border=\"0\" cellpadding=\"2\" cellspacing=\"2\" >
+        <tbody>
+        <tr style=\"cursor:pointer;border:0px;\" onclick=\"var v=document.getElementById('bloque_$uid_$valor[campanaId]');	var i=document.getElementById('img_$uid_$valor[campanaId]'); var o=document.getElementById('open');	if(v.style.display=='none'){v.style.display='block';i.src='img/less.gif';o.value = o.value+'$valor[campanaId]'+'-';}else{ v.style.display='none';i.src='img/more.gif';o.value = o.value.replace('$valor[campanaId] ','')}\">
+        <th style=\"border:0px;\"><img src=\"img/pixel.gif\" width=\"15px\"><img src=\"img/$icono_bloque.gif\" id=\"img_$uid_$valor[campanaId]\">&nbsp;$valor[campana]</th>
         </tr>
         </table>
         <div id=\"bloque_$uid_$valor[campanaId]\" style=\"display:$display_bloque;\">
-        <table id=\"tabla_contactos$contador_tablas\" class=\"tablesorter\" >
+        <table id=\"tabla_contactos$contador_tablas\" class=\"tablesorter\" style=\"border:0px;\" >
             <thead>
               <tr>
-              <th style=\"width:150px; cursor:pointer;\">Origen</td>
-              <th style=\"width:360px; cursor:pointer;\">Nombre</th>
-              <th style=\"width:340px; cursor:pointer;\">Vendedor</th>
-              <th style=\"width:150px; cursor:pointer;\">Registro</th>
-              <th style=\"width:170px; cursor:pointer;\">Tel o Email</th>
-              <th style=\"width:170px; cursor:pointer;\">Producto</th>
-              <th style=\"width:170px; cursor:pointer;\">Compromiso</th>
-              <th style=\"width:150px; cursor:pointer;\">Retraso (hrs)</th>
-              <th style=\"width:32px; cursor:pointer;\">Sel.</th></tr>
-                      </thead>
-                      <tbody>";
-
+              <th style=\"width:150px; cursor:pointer;\" class='tdcenter'>Origen</td>
+              <th style=\"width:360px; cursor:pointer;\" class='tdcenter'>Nombre</th>
+              <th style=\"width:340px; cursor:pointer;\" class='tdcenter'>Vendedor</th>
+              <th style=\"width:150px; cursor:pointer;\" class='tdcenter'>Registro</th>
+              <th style=\"width:170px; cursor:pointer;\" class='tdcenter'>Tel&eacute;fono y/o e-mail</th>
+              <th style=\"width:170px; cursor:pointer;\" class='tdcenter'>Producto</th>
+              <th style=\"width:170px; cursor:pointer;\" class='tdcenter'>Compromiso</th>
+              <th style=\"width:150px; cursor:pointer;\" class='tdcenter'>Retraso (hrs)</th>
+              <th style=\"width:32px; cursor:pointer;\" class='tdcenter'>Sel.</th></tr>
+            </thead>
+            <tbody>";
         if(count($registros)> 0)
         {
             $modelos_seleccionados='';
@@ -99,15 +100,15 @@ if ( (count($campanasNombre) > 0) )
                     $id_ven=$valores[uid];
                     $tabla_campanas .= "
                         <tr class=\"row".(($c++%2)+1)."\">
-                        <td>".$array_fuentes[$idfuente]."</td>
-                        <td>
+                        <td class='tdleft'>".$array_fuentes[$idfuente]."</td>
+                        <td class='tdleft'>
                             <a class='background-color:#fff;' target=\"llamada\" href=\"index.php?_module=Campanas&_op=llamada_ro&llamada_id=$valores[idllamada]&contacto_id=$valores[idcontacto]&campana_id={$valores[idcampana]}\">
                              ".$valores['nombre']."</a>
                         </td>
-                        <td>".$array_vendedores[$id_ven]."</td>
-                        <td>".$valores['fecha_importado']."</td>
-                        <td>".$valores['tels']."<br>".$valores['email']."</td>
-                        <td>".$modelos_seleccionados."</td>";
+                        <td class='tdleft'>".$array_vendedores[$id_ven]."</td>
+                        <td class='tdleft'>".$valores['fecha_importado']."</td>
+                        <td class='tdleft'>".$valores['tels']."<br>".$valores['email']."</td>
+                        <td class='tdleft'>".$modelos_seleccionados."</td>";
                         $compromiso='';
                         $ret='';
                         if($valores['idstatus'] == -2)
@@ -119,31 +120,31 @@ if ( (count($campanasNombre) > 0) )
                             }
 
                         }
-                    $tabla_campanas .= "<td>".$compromiso."</td>
-                        <td>".$ret."</td>
-                        <td><input type=\"checkbox\" name=\"chbx_".$valores[idcontacto]."\" style=\"height:12;width:16;\"></td></tr>";
+                    $tabla_campanas .= "<td class='tdleft'>".$compromiso."</td>
+                        <td class='tdright'>".$ret."</td>
+                        <td class='tdcenter'><input type=\"checkbox\" name=\"chbx_".$valores[idcontacto]."\" style=\"height:12;width:16;\"></td></tr>";
                     $total_campana=$valores['total_campana'];
                 }
             }
         }
         $tabla_campanas .= "</tbody>";
-        $tabla_campanas .= "<tr class=\"row".(($c++%2)+1)."\"><td align=\"right\"><b>Total</b></td><td><b>$total_bloque</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
+        $tabla_campanas .= "<tr class=\"row".(($c++%2)+1)."\"><td class=\"tdright\">Total</td><td class='tdleft' colspan='7'>$total_bloque</td></tr>";
         $tabla_campanas .= "</table>";
         $tabla_campanas .= "</div>";
     }
     $tabla_campanas .= "<table class=\"width100\">";
     $tabla_campanas .= "<thead>";
-    $tabla_campanas .= "<tr class=\"row".(($c++%2)+1)."\"><th></th><th align=\"left\" colspan=\"6\"><b>Total</b><b> $counter</b></th></tr>";
+    $tabla_campanas .= "<tr class=\"row".(($c++%2)+1)."\"><th></th><th class=\"tdleft\" colspan=\"6\">Total: $counter</th></tr>";
     $tabla_campanas .= "</thead></table>";
 
-    $tabla_campanas .= "<table class=\"width100\"><tr class=\"row".(++$row_class%2+1)."\" style=\"text-align:center;\">"
-    ."<td colspan=7>"
-    ."<input name=\"all\" type=\"button\" onclick=\"allon();\" value=\"Todos\">&nbsp;"
-    ."<input name=\"none\" type=\"button\" onclick=\"alloff();\" value=\"Ninguno\"></td></tr>"
+    $tabla_campanas .= "<table width=\"40%\" style='border:0px;'>
+        <tr class=\"row".(++$row_class%2+1)."\" style=\"text-align:center;\">"
+    ."  <td class='tdcenter'>"
+        ."<input name=\"all\" type=\"button\" onclick=\"allon();\" value=\"Todos\">&nbsp;"
+        ."<input name=\"none\" type=\"button\" onclick=\"alloff();\" value=\"Ninguno\"></td></tr>"
     ."<tr class=\"row".(++$row_class%2+1)."\" style=\"text-align:center;\">"
-    ."<td colspan=7>"
-    ."<input type=\"submit\" name=\"seleccionar\" value=\"Reasignar\"></td></tr>"
-    ."<tr class=\"row".(++$row_class%2+1)."\" style=\"text-align:center;\"></table>";
+    ."<td class='tdcenter'>"
+    ."<input type=\"submit\" name=\"seleccionar\" value=\"Reasignar\"></td></tr></table>";
 
 }
 $archivo='Monitoreo-de-Prospectos-'.$gid;

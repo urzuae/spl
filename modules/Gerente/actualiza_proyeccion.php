@@ -3,7 +3,7 @@ if (!defined('_IN_MAIN_INDEX'))
 {
     die ("No puedes acceder directamente a este archivo...");
 }
-global $db,$uid,$_module,$_op,$user_id,$ano,$mes,$actualiza_proyeccion,$cantidad;
+global $db,$uid,$_module,$_op,$user_id,$ano,$mes,$actualiza_proyeccion,$cantidad,$obligatorio;
 include_once("funcion_metas.php");
 $sql  = "SELECT gid, super FROM users WHERE uid='".$uid."'";
 $result = $db->sql_query($sql) or die("Error");

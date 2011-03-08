@@ -5,21 +5,21 @@
   </head>
   <body>
 <center>
+<script type="text/javascript" src="$_themedir/jquery/crm_directorio_contacto_fuentes.js"></script>
 <form action="index.php" method="post">
 <input type="hidden" name="_module" value="$_module">
 <input type="hidden" name="_op" value="$_op">
-<table border="0" align="center" width="40%">
+<table border="0" align="center" width="30%">
 <thead>
 <tr>
-  <td colspan="2">Opciones de reporte</td>
+  <th colspan="2" class="tdleft">Opciones de reporte</th>
 </tr>
 </thead>
 <tr class="row1">
-  <td style="width:100px;">Fecha de inicio</td>
-  <td style="width:200px;"><input name="fecha_ini" id="fecha_ini" value="$fecha_ini"><img src="img/calendar.gif" id="f_trigger_c" style="border: 1px solid white; cursor: pointer;" title="Fecha" onmouseover="this.style.background='white';" onmouseout="this.style.background=''"></td>
+  <td class="tdleft" width=50%"">Fecha de inicio</td>
+  <td class="tdleft"><input type="text"  name="fecha_ini" id="fecha_ini" value="$fecha_ini"><img src="img/calendar.gif" id="f_trigger_c" style="border: 1px solid white; cursor: pointer;" title="Fecha" onmouseover="this.style.background='white';" onmouseout="this.style.background=''"></td>
 </tr>
 <script>
-
     var conexion_vta_eliminar;
     var result_vta_eliminar;
     var url_regreso;
@@ -67,8 +67,8 @@ Calendar.setup(
 );
 </script>
 <tr class="row1">
-  <td>Fecha de fin</td>
-  <td><input name="fecha_fin" id="fecha_fin" value="$fecha_fin"><img src="img/calendar.gif" id="f_trigger_d" style="border: 1px solid white; cursor: pointer;" title="Fecha" onmouseover="this.style.background='white';" onmouseout="this.style.background=''"></td>
+  <td class="tdleft">Fecha de fin</td>
+  <td class="tdleft"><input type="text"  name="fecha_fin" id="fecha_fin" value="$fecha_fin"><img src="img/calendar.gif" id="f_trigger_d" style="border: 1px solid white; cursor: pointer;" title="Fecha" onmouseover="this.style.background='white';" onmouseout="this.style.background=''"></td>
 </tr>
 <script>
 Calendar.setup(
@@ -82,20 +82,15 @@ Calendar.setup(
 
       </script>
 <tr class="row1">
-  <td style="width:100px;">Origen</td>
-  <td style="width:200px;">$select_fuentes</td>
+  <td class="tdleft" valign="top">Origen</td>
+  <td class="tdleft">$select_fuentes</td>
 </tr>
-<!--<tr class="row1">
-  <td colspan="2" align="center"><input type="submit" name="submit" value="Aceptar"><input type="button" value="Regresar" onclick="location.href='index.php?_module=$_module';"></td>
-</tr>-->
-</table>
-</br>
-<input type="submit" name="submit" value="Aceptar"><input type="button" value="Regresar" onclick="location.href='index.php?_module=$_module';">
-<table border="0" align="center" width="90%">
-<tr>
-    <td colspan="2" align="center"><br>$_html</td>
+<tr class="row1">
+  <td colspan="2" class="tdcenter"><input type="submit" name="submit" value="Aceptar">&nbsp;<input type="button" value="Regresar" onclick="location.href='index.php?_module=$_module';"></td>
 </tr>
 </table>
+<p align="center">$_html</p>
+<br>
 <div id="datos">
     $_html_datos
 </div>

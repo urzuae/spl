@@ -3,31 +3,30 @@
     <script type="text/javascript" src="$_themedir/jquery/crm_proyeccion.js"></script>
     <input name="_module" value="$_module" type="hidden">
     <input name="_op" value="$_op" type="hidden">
+    <center>
     <table width="70%" border="0">
         <thead>
         <tr>
-            <td colspan="3" align="center"><div class="title" height="50"><h1>Consulta de Proyecciones</h1></div></td>
+            <th colspan="3" class="tdleft">Consulta de objetivos de ventas</th>
         </tr>
         </thead>
         <tbody>
-        <tr height="30"><td>&nbsp;</td></tr>
-        <tr class="row2" height="30">
-            <td width="40%">Favor de seleccionar el a&ntilde;o a consultar</td>
-            <td width="40%">$select_ano</td>
-            <td width="20%"><input type="submit" value="Buscar Proyecciones" id="buscar_proyeccion" name="buscar_proyeccion" /></td>
+        <tr class="row2">
+            <td width="40%" class="tdleft">Favor de seleccionar el a&ntilde;o</td>
+            <td width="40%" class="tdleft">$select_ano</td>
+            <td width="20%" class="tdleft"><input type="submit" value="Buscar" id="buscar_proyeccion" name="buscar_proyeccion" /></td>
         </tr>
     </tbody>
     </table>
     <br>
     <table width="100%" align="center" border="0">
-    </tbody>
-
         <tbody>
         <tr>
-            <td colspan="2" class="content" style="width:100%;" align="center">$buffer</td>
+            <td colspan="2" class="tdcenter">$buffer</td>
         </tr>
         </tbody>
     </table>
+    </center>
 </form>
 </body>
 </html>

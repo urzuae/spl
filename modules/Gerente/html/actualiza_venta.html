@@ -53,10 +53,10 @@ function actualiza_venta(modelo,contacto_id,modelo_id,version_id,transmision_id,
     var urlventa ="index.php?_module=Gerente&_op=ActualizaVenta";
     var chasis_f=document.getElementById(chasis).value;
     var precio_f=document.getElementById(precio).value;
-    if( (chasis_f.length > 0) && (precio_f.length > 0) )
+    if( precio_f.length > 0) 
     {
         //if(longitud(chasis_f))
-        if((longitud(chasis_f)) &&(checa_precio(precio_f)) )
+        if(checa_precio(precio_f))
         {
             if(confirm('Esta seguro de actualizar los datos de la venta del modelo: '+modelo))
             {
@@ -70,7 +70,7 @@ function actualiza_venta(modelo,contacto_id,modelo_id,version_id,transmision_id,
     }
     else
     {
-        alert("Favor de especificar el no de chasis y el precio");
+        alert("Favor de especificar el precio");
     }
 }
 function procesarVentasActualizadas()
@@ -112,9 +112,11 @@ function crearXMLHttpRequest()
 <input name="_module" value="$_module" type="hidden">
 <input name="_op" value="$_op" type="hidden">
 <table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2"> <tbody>
-<tr align="center"> <th>Actualizar Venta</th></tr>
-<tr class="row1">
-  <td>
-      $buffer
-  </td>
+    <thead><tr class="tdleft"><th>Actualizar Venta</th></tr></thead>
+    <tbody>
+        <tr class="row1">
+        <td>
+        $buffer
+        </td>
+        </tr>
 </tbody></table></form></body></html>

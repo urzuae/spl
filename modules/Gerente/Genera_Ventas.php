@@ -37,7 +37,7 @@ class Genera_Ventas
     function Genera_Imagen()
     {
         $this->xml="<chart bgColor='FFFF99,FFFFFF' caption='Sales Funnel' FontSize= '18'   showPercentValues='0' decimals='0' baseFontSize='11' isSliced='1' formatNumberScale='1' showValues='1' formatNumberScale='0' showBorder='1'>\n
-        <set label='Total de prospectos de la Distribuidora' value='".$this->total_prospectos."'/>\n";
+        <set label='Total de prospectos de la sucursal' value='".$this->total_prospectos."'/>\n";
         $increm=0.0000000000000001;
         foreach($this->array_campanas as $nm_etapa => $prospectos)
         {

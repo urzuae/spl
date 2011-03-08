@@ -3,21 +3,19 @@
     die ("No puedes acceder directamente a este archivo...");
 }
 
-global $db, $uid, $orderby, $rsort;
+global $db, $uid, $orderby, $rsort,$_site_title;
+$_site_title = "Prospectos-SFG0006";
 include_once("class_autorizado.php");
-
-
-  $select_modelo=Regresa_modelos($db);
-
-
+$select_modelo=Regresa_modelos($db);
 $sql  = "SELECT gid, super FROM users WHERE uid='$uid'";
 $result = $db->sql_query($sql) or die("Error");
 list($gid, $super) = $db->sql_fetchrow($result);
 if ($super > 6)
 {
   $_html = "<h1>Usted no es un Gerente</h1>";
-} else {
-
+}
+else
+{
   global $asignar_a, $submit, $submit_seleccionar, $buscar_asignado;
   $array_para_ordenar = array();
   $ordered_contacto_ids = array();
@@ -38,7 +36,6 @@ if ($super > 6)
   }
 
   $r3 = $db->sql_query("SELECT nombre FROM crm_fuentes WHERE fuente_id='$origen_id' LIMIT 1");
-  //obtenemos todas las campañas posibles para evitar consultas posteriores
   $origenes = array();
   $sql = "SELECT fuente_id, nombre FROM crm_fuentes ";
   $r = $db->sql_query($sql) or die($sql);
@@ -99,7 +96,6 @@ if ($super > 6)
   $vehiculo_bk = $vehiculo;
 
   if (!$order) $order = "contacto_id";
-//   if ($no_asignados) {$no_asignados_checked = "CHECKED"; $where .= "AND uid=0 ";}
   if ($contacto_id)      $where .= "AND c.contacto_id LIKE '%$contacto_id%' ";
   if ($nombre)           $where .= "AND c.nombre LIKE '%$nombre%' ";
   if ($apellido_paterno) $where .= "AND c.apellido_paterno LIKE '%$apellido_paterno%'";
@@ -109,8 +105,7 @@ if ($super > 6)
   if ($buscar_asignado)       $where .= " AND uid='$buscar_asignado'";
   if ($where == "")  $where .= "AND uid=0 ";//los no asignados
 
-
-  
+ 
   //ahora si hacemos el query limitado
   $sql = "SELECT c.contacto_id, c.origen_id, c.nombre, c.apellido_paterno, c.apellido_materno, c.tel_casa, c.tel_oficina, c.tel_movil, c.tel_otro, c.uid, c.prioridad, DATE_FORMAT(c.fecha_importado,'%d-%m-%Y %h:%m:%s'), l.intentos,c.fecha_autorizado,c.fecha_firmado"
         ." FROM crm_contactos AS c, crm_campanas_llamadas as l WHERE (gid='$gid' ) AND c.contacto_id = l.contacto_id $where ORDER BY c.prioridad DESC";//OR gid='0'
@@ -118,7 +113,7 @@ if ($super > 6)
   $result = $db->sql_query($sql) or die("Error al leer".print_r($db->sql_error()));
   if ($db->sql_numrows($result) > 0)
   {
-
+ 
     while (list($c, $origen_id, $nombre, $apellido_paterno, $apellido_materno, $t1, $t2, $t3, $t4, $c_uid, $prioridad, $fecha_importado, $intento,$fecha_autorizado,$fecha_firmado) = htmlize($db->sql_fetchrow($result)))
     {
     	if ($t4) $t = $t4;
@@ -126,46 +121,40 @@ if ($super > 6)
 	    if ($t2) $t = $t2;
 	    if ($t1) $t = $t1;
 	    $telefono_ = $t;
-
-	    //ponerle nombre al origen del array
-		$origen = $origenes[$origen_id];
-		//el vehiculo que quieren
-		//hay un vehículo por cada contacto, si no no funciona la db
-		$r3 = $db->sql_query("SELECT modelo FROM crm_prospectos_unidades WHERE contacto_id='$c' LIMIT 1");
-		list($vehiculo) = $db->sql_fetchrow($r3);
+        //ponerle nombre al origen del array
+	$origen = $origenes[$origen_id];
+	//el vehiculo que quieren
+	//hay un vehículo por cada contacto, si no no funciona la db
+	$r3 = $db->sql_query("SELECT modelo FROM crm_prospectos_unidades WHERE contacto_id='$c' LIMIT 1");
+	list($vehiculo) = $db->sql_fetchrow($r3);
     	if ($vehiculo_bk) 
     		if (strpos(strtoupper($vehiculo), strtoupper($vehiculo_bk)) === FALSE) 
     			continue;
     	//el usuario al que está asignado se saca del array
-		if ($c_uid)
+        $asignado_a = "";
+	if ($c_uid)
         {
-			$asignado_a = $users[$c_uid];
-	    }
-		else
-            $asignado_a = "";
-
-        $objeto= new Fecha_autorizado ($db,$fecha_autorizado,$fecha_firmado);
-        $color_semaforo=$objeto->Obten_Semaforo();
-
-		$contactos_id[] = $c;
+            $asignado_a = $users[$c_uid];
+        }
+        $contactos_id[] = $c;
         $contactos_id_para_sortear[$c] = $c;  
-		$asignados_a[$c] = $asignado_a;
-		$last_asignados_a[$c] = $ultimo_uid;
-		$nombres[$c] = "$nombre<br>$apellido_paterno $apellido_materno";
+	$asignados_a[$c] = $asignado_a;
+	$last_asignados_a[$c] = $ultimo_uid;
+	$nombres[$c] = "$nombre<br>$apellido_paterno $apellido_materno";
         $autorizados[$c]=$color_semaforo;
-		$origenes[$c] = $origen;
-		$origenes_id[$c] = $origen_id;
-		$vehiculos[$c] = $vehiculo;
-		$esperas[$c] = $ultimo_contacto_timestamp;
-		$ultimo_contactos_ts[$c] = $ultimo_contacto_timestamp_bk;
-		$prioridad_arr[$c] = $prioridades[$prioridad];
-		$prioridades_arr[$c] = $prioridad;
-		$color_prioridad[$c] = $prioridades_color[$prioridad];
-		$fechas_importado[$c] = $fecha_importado; 
-		$intentos[$c] = $intento; 
-		$counter++; //para saber cuantos estamos mostrando	  
+        $origenes[$c] = $origen;
+	$origenes_id[$c] = $origen_id;
+	$vehiculos[$c] = $vehiculo;
+	$esperas[$c] = $ultimo_contacto_timestamp;
+	$ultimo_contactos_ts[$c] = $ultimo_contacto_timestamp_bk;
+	$prioridad_arr[$c] = $prioridades[$prioridad];
+	$prioridades_arr[$c] = $prioridad;
+	$color_prioridad[$c] = $prioridades_color[$prioridad];
+	$fechas_importado[$c] = $fecha_importado; 
+        $intentos[$c] = $intento;
+	$counter++; //para saber cuantos estamos mostrando	  
     }
-	if (count($contactos_id) > 0)
+    if (count($contactos_id) > 0)
     {
 		    //ordenar la tabla por los datos que solicitan
 	    switch($orderby)
@@ -210,69 +199,59 @@ if ($super > 6)
         $lista_contactos .= "<table  id=\"tabla_contactos\"  class=\"tablesorter\">";//style=\"width:100%;\"
 
             $lista_contactos .= "<thead><tr>
-    <th width='7%'>Campa&ntilde;a</th>
-    <th width='6%'>Prioridad</th>
-    <th>Nombre</th>
-    <th>Fecha de registro</th>
-    <th width='6%'>Intentos</th>
-    <th>Tiempo de espera (hrs)</font></th>
-    <th width='8%'>Producto</th>
-    <th>Asignado anteriormente a</th>
-    <th width='8%'>Asignado a</th>
-    <th width='8%'>Seleccionar</th>
-    <th width='7%'>Cancelar</th>
+    <th width='7%'  class='tdleft'>Campa&ntilde;a</th>
+    <th width='6%'  class='tdleft'>Prioridad</th>
+    <th width='20%' class='tdleft'>Nombre</th>
+    <th width='8%'  class='tdleft'>Producto</th>
+    <th width='8%'  class='tdleft'>Fecha de registro</th>
+    <th width='6%'  class='tdleft'>Intentos</th>
+    <th width='10%' class='tdleft'>Tiempo de espera (hrs)</font></th>
+    <th width='10%' class='tdleft'>Asignado anteriormente</th>
+    <th width='8%'  class='tdleft'>Asignado</th>
+    <th width='8%'  class='tdleft'>Seleccionar</th>
+    <th width='7%'  class='tdleft'>Cancelar</th>
     </tr></thead>";//
     	$lista_contactos .= "<tbody>";
 	    foreach ($ordered_contacto_ids AS $c)
 	    {
 	      
           $lista_contactos .= "<tr style=\"height:35px;\" id=\"$c\">\n"
-						      ."<td>{$origenes[$c]}</td>\n"
-                              ."<td style=\"background-image:none;background-color: {$color_prioridad[$c]}\" style=\"background-image:none\">$prioridad_arr[$c]</td>\n"
-                              ."<td  style=\"cursor:pointer;\" \n"
-                              ."onclick=\"location.href='index.php?_module=Directorio&_op=contacto&contacto_id=$c&last_module=$_module&last_op=$_op';\" NOWRAP>{$nombres[$c]}&nbsp;&nbsp;<span style='background-color:{$autorizados[$c]}'>&nbsp;&nbsp;&nbsp;</span></td>\n"
-                              ."<td nowrap=\"nowrap\">{$fechas_importado[$c]}</td>\n"
-                              ."<td>{$intentos[$c]}</td>\n"
-                              ."<td id=\"espera_$c\" class=\"espera\"></td>\n"  //{$esperas[$c]}
-						      ."<td>{$vehiculos[$c]}</td>\n"
-						      ."<td id=\"ultimo_vendedor_$c\" class=\"ultimo_vendedor\"></td>\n"
-						      ."<td>{$asignados_a[$c]}</td>\n"
-                              ."<td><input type=\"checkbox\" name=\"chbx_$c\" style=\"height:12;width:16;\" ></td>\n"
-                              ."<td><img src=\"img/del.png\" style=\"cursor:pointer;\" onclick=\"window.open('index.php?_module=$_module&_op=contacto_cancelar&contacto_id=$c', 'Cancelación','location=no,resizable=yes,scrollbars=yes,navigation=no,titlebar=no,directories=no,width=400,height=175,left=0,top=0,alwaysraised=yes');\"></td>\n"
+                              ."<td class='tdleft' >{$origenes[$c]}</td>"
+                              ."<td class='tdleft' style=\"background-image:none;background-color: {$color_prioridad[$c]}\" style=\"background-image:none\">$prioridad_arr[$c]</td>"
+                              ."<td class='tdleft' style=\"cursor:pointer;\""
+                              ."onclick=\"location.href='index.php?_module=Directorio&_op=contacto&contacto_id=$c&last_module=$_module&last_op=$_op';\" NOWRAP>{$nombres[$c]}</td>"
+                              ."<td class='tdleft'>{$vehiculos[$c]}</td>"
+                              ."<td class='tdleft' nowrap=\"nowrap\">".substr($fechas_importado[$c],0,10)."</td>"
+                              ."<td class='tdcenter'>{$intentos[$c]}</td>"
+                              ."<td class='tdleft' id=\"espera_$c\" class=\"espera\"></td>"
+                              ."<td class='tdleft' id=\"ultimo_vendedor_$c\" class=\"ultimo_vendedor\"></td>\n"
+                              ."<td class='tdleft' >{$asignados_a[$c]}</td>\n"
+                              ."<td class='tdcenter'><input type=\"checkbox\" name=\"chbx_$c\" style=\"height:12;width:16;\" ></td>\n"
+                              ."<td class='tdcenter'><img src=\"img/del.png\" style=\"cursor:pointer;\" onclick=\"window.open('index.php?_module=$_module&_op=contacto_cancelar&contacto_id=$c', 'Cancelación','location=no,resizable=yes,scrollbars=yes,navigation=no,titlebar=no,directories=no,width=400,height=175,left=0,top=0,alwaysraised=yes');\"></td>\n"
                             ."</tr>\n";
 	    }
   	  $lista_contactos .= "</tbody>";
   	  $lista_contactos .= "</table>";
-  	  
-  	  
-
-  	  
-  	  
+ 	  
       $select_users = "<select name=\"asignar_a\">";
       $result2 = $db->sql_query("SELECT uid, user FROM users WHERE gid='$gid' AND super='8'") or die("Error");
       while(list($a_uid, $a_user) = htmlize($db->sql_fetchrow($result2)))
       {
         $select_users .= "<option value=\"$a_uid\">$a_user</option>";
       }
-      $select_users .= "</select>";
-      
-      
-      
-      $lista_contactos .= "<br><br><table style=\"width:100%\">";
-      $lista_contactos .= "<tr class=\"row".(++$row_class%2+1)."\" style=\"text-align:center;\">"
-                          ."<td colspan=11>"
+      $select_users .= "</select>";     
+      $lista_contactos .= "<table width='100%' style='border:0px;'>";
+      $lista_contactos .= "<tr class=\"row".(++$row_class%2+1)."\" class='tdleft'>"
+                          ."<td colspan=11 class='tdcenter'>"
                           ."<input name=\"all\" type=\"button\" onclick=\"allon();\" value=\"Todos\">&nbsp;"
                           ."<input name=\"none\" type=\"button\" onclick=\"alloff();\" value=\"Ninguno\">"
                           ."</td></tr>"
-                          ."<tr class=\"row".(++$row_class%2+1)."\" style=\"text-align:center;\">"
-                          ."<td colspan=11>"
+                          ."<tr class=\"row".(++$row_class%2+1)."\">"
+                          ."<td colspan=11 class='tdcenter'>"
                           ."Asignar a $select_users"
                           ."<input type=\"submit\" name=\"submit_seleccionar\" value=\"Seleccionar\">"
                           ."</td></tr>";
-        //                  ."<tr class=\"row".(++$row_class%2+1)."\" style=\"text-align:center;\">";
     	$lista_contactos .= "</table>";
-
-    	
     }//si hay algo que mostrar
   }//sql numrows
   else $lista_contactos .= "<br><center>No se encontraron contactos con esos datos, por favor intente de nuevo.</center>";
@@ -316,12 +295,12 @@ else $jsarray = "var array_contacto_ids = Array();\n";
 function Regresa_modelos($db)
 {
     $buffer='';
-    $sql_uni="SELECT unidad_id,nombre FROM crm_unidades ORDER BY nombre;";
+    $sql_uni="SELECT unidad_id,nombre FROM crm_unidades WHERE active=1 ORDER BY nombre;";
     $res_uni=$db->sql_query($sql_uni);
     if($db->sql_numrows($res_uni)>0)
     {
         $buffer.='<select name="vehiculo">
-                    <option value="">Todos</option>';
+                    <option value="0">Todos</option>';
         while($fila = $db->sql_fetchrow($res_uni))
         {
             $buffer.="<option value='".$fila['nombre']."'>".$fila['nombre']."</option>";

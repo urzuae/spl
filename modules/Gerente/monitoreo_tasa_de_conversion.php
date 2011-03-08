@@ -5,9 +5,11 @@ if (!defined('_IN_MAIN_INDEX'))
 }
 
 
-global $db, $user, $uid, $fecha_ini, $fecha_fin, $submit, $fuente_id;
-
+global $db, $user, $uid, $fecha_ini, $fecha_fin, $submit, $fuente_id,$origen, $_site_title;
+$fuente_id=$origen;
+include_once("admin/Monitoreo/crea_filtro.php");
 if ($fecha_ini)
+$_site_title = "Tasa de conversion-SFG0014";
 {
   $titulo .= " desde $fecha_ini";
   $fecha_ini_script=$fecha_ini;
@@ -35,7 +37,7 @@ if ($super > 6)
 }
 else
 {
-    if($gid!='')
+    /*if($gid!='')
     {
         $res_no_visibles=$db->sql_query("SELECT fuente_id FROM crm_groups_fuentes WHERE gid='".$gid."';");
         if($db->sql_numrows($res_no_visibles) > 0)
@@ -48,9 +50,10 @@ else
         }
     }
     if($lista_gid_no_visibles!='')
-        $filtro_gid=" AND fuente_id NOT IN (".$lista_gid_no_visibles.") ";
+        $filtro_gid=" AND fuente_id NOT IN (".$lista_gid_no_visibles.") ";*/
 
-    $sql = "SELECT fuente_id, nombre FROM crm_fuentes where fuente_id > 1 ".$filtro_gid.";";
+    $select_fuentes=genera_origen($db,$fuente_id);
+    /*$sql = "SELECT fuente_id, nombre FROM crm_fuentes where fuente_id > 1 ".$filtro_gid.";";
     $result = $db->sql_query($sql) or die("Error");
     $select_fuentes = "<select name=\"fuente_id\">
                      <option value=\"0\">Todos</option>";
@@ -65,7 +68,7 @@ else
         $select_fuentes .= "<option value=\"$origen_id\" $selected>$nombre_origen</option>";
         $array_origenes[$origen_id]=$nombre_origen;
     }
-    $select_fuentes .= "</select>";
+    $select_fuentes .= "</select>";*/
 
 
 
@@ -184,13 +187,14 @@ else
 		</tr>";
 	    }
         $_html = "
-        <table border=\"0\">
-		<tr>
+        <table border=\"0\" width='60%'>
+            <thead><tr><th colspan='3' align='center'>Tasa de Conversi&oacute;n</th></tr></thead>
+		<tr height='40'>
 			<td></td>
 			<td></td>
 			<td style=\"font-size:24px;text-align:center;\"><a href='#' id='visualiza' style=\"font-size:24px;color:#3e4f88;\">$num_ventas ventas</a></td>
 		</tr>
-		<tr>
+		<tr height='40'>
 			<td style=\"font-size:24px;font-weight:bold;\">$tasa</td>
 			<td style=\"font-size:36px;\">=</td>
 			<td><hr style=\"width:240px;\"></td>
@@ -245,8 +249,8 @@ else
                           <td>&nbsp;".$array_datos[$contacto]['timestamp']."</td>
                           <td>&nbsp;".$array_datos[$contacto]['modelo']."</td>
                           <td>&nbsp;".$array_datos[$contacto]['chasis']."</td>
-                          <td align='center'><a href='#' onclick=\"window.open('$url','ventana','$atributos');\"><img src='img/edit.gif' style='border: 0px solid white; cursor: pointer;' title='Actualizar informacion sobre la venta de vehiculo'></a></a></td>
-                          <td align='center'><a href='#' onclick=\"elimina_venta('$tmp_con','$tmp_mod','$tmp_ver','$tmp_tra','$tmp_tim','$tmp_cha','$fecha_ini','$fecha_fin','$fuente_id');\"><img src='img/del.gif' style='border: 0px solid white; cursor: pointer;' title='Cancelar Venta de vehiculo'></a></td>
+                          <td align='center'><a href='#' onclick=\"window.open('$url','ventana','$atributos');\"><img src='img/edit.gif' style='border: 0px solid white; cursor: pointer;' title='Actualizar datos de venta'></a></a></td>
+                          <td align='center'><a href='#' onclick=\"elimina_venta('$tmp_con','$tmp_mod','$tmp_ver','$tmp_tra','$tmp_tim','$tmp_cha','$fecha_ini','$fecha_fin','$fuente_id');\"><img src='img/del.gif' style='border: 0px solid white; cursor: pointer;' title='Cancelar venta '></a></td>
                           </tr>";
               }
             $_html_datos.= "</tbody><thead><tr><td colspan='12'> Total:  ".count($array_count)."</td></tr></thead></table></div>";

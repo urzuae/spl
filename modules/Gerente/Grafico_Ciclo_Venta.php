@@ -12,8 +12,9 @@ class Grafico_Ciclo_Venta
     var $filtro;
     var $gid;
     var $buffer;
+    var $ano_id;
 
-    function  __construct($db,$uid,$_includesdir) {
+    function  __construct($db,$uid,$_includesdir,$ano_id) {
         $this->ano_id=$ano_id;
         $this->include=$_includesdir;
         $this->db=$db;
@@ -22,7 +23,7 @@ class Grafico_Ciclo_Venta
         $this->total_prospectos=0;
         $this->buffer="";
         $this->Filtro();
-        $this->Consulta_Informacion();
+        $this->Consulta_Informacion();        
         if($this->total_prospectos > 0)
         {
             $this->Ordena_Array();
@@ -33,7 +34,7 @@ class Grafico_Ciclo_Venta
     {
         $total=0;
         $sql_c="SELECT count(a.contacto_id) as total FROM crm_campanas_llamadas as a LEFT JOIN crm_contactos as b
-          ON a.contacto_id=b.contacto_id WHERE a.campana_id='".$campana_id."' ".$this->filtro.";";
+          ON a.contacto_id=b.contacto_id WHERE a.campana_id='".$campana_id."' ".$this->filtro." AND YEAR(b.fecha_importado)=".$this->ano_id.";";
         $res_c=$this->db->sql_query($sql_c) or die("Error en le consulta:  ".$sql_c);
         list($total)  = $this->db->sql_fetchrow($res_c);
         return $total;
@@ -95,8 +96,7 @@ class Grafico_Ciclo_Venta
             $total_prospectos=$total_prospectos + $prospectos;
         }
         $this->xml.="</chart>";
-        $this->buffer="<table width='70%' align='center' border='0'>
-                       <tr><td align='left'><b>Ciclo de Venta</b>:  No de Prospectos :  ".$total_prospectos."</td></tr>
+        $this->buffer="<table width='70%' align='center' style='border:0px;'>
                        <tr><td align='center'>".renderChartHTML($this->include."/fusion/Column3D.swf", "", $this->xml, "Ciclo de Ventas", 750, 350, false)."</td></tr>
                        </table><br>";
 
@@ -109,7 +109,7 @@ class Grafico_Ciclo_Venta
 
     function Genera_Imagen($array)
     {
-        $this->xml="<chart bgColor='FFFF99,FFFFFF' caption='Sales Funnel' subcaption='Total de prospectos de la Distribuidora: ".$this->total_prospectos."'  FontSize= '18'   showPercentValues='0' decimals='0' baseFontSize='11' isSliced='1' formatNumberScale='1' showValues='1' formatNumberScale='0' showBorder='1'>\n";
+        $this->xml="<chart bgColor='FFFF99,FFFFFF' caption='Sales Funnel' subcaption='Total de prospectos de la sucursal: ".$this->total_prospectos."'  FontSize= '18'   showPercentValues='0' decimals='0' baseFontSize='11' isSliced='1' formatNumberScale='1' showValues='1' formatNumberScale='0' showBorder='1'>\n";
         $increm=0.0000000000000001;
         foreach($array as $nm_etapa => $prospectos)
         {

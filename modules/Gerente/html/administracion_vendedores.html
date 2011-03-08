@@ -4,31 +4,35 @@
         <title></title><meta content="">
     </head>
 <body>
-<span class="title">Permisos de vendedores</span><br><br>
 <form onchange="capsall(this);" name="new" action="index.php" method="post"><input name="_module" value="$_module" type="hidden"><input name="_op" value="$_op" type="hidden">
 <center>
-  <table style="text-align: center;" width="80%" border="0" cellpadding="2" cellspacing="1">
-
-<thead>
-      <tr>
-        <td> Clave del vendedor</td>
-        <td> Nombre del vendedor</td>        
-        <td> Puede editar la información de los prospectos </td>
-        <td> Puede actualizar o eliminar ventas </td>
-      </tr>
+  <table width="80%">
+      <thead>
+          <tr>
+              <th colspan="4" class="tdleft">Permisos de vendedores</th></tr>
       </thead>
-    <tbody>
-    $users
-      <tr class="">
-
-        <!--<td rowspan="1" align="center" colspan="3"><input value="Guardar" name="submit" type="submit">&nbsp;<input type="button" value="Regresar" onclick="location.href='index.php?_module=$_module';"></td>-->
-        
-      </tr>
-
-    </tbody>
+      <tbody>
+        <tr>
+            <td colspan="4">
+            <table width="80%" align="center">
+            <thead>
+                <tr>
+                    <th class="tdcenter"> Clave del vendedor</th>
+                    <th class="tdcenter"> Nombre del vendedor</th>
+                    <th class="tdcenter"> Editar la información<br> de los prospectos </th>
+                    <th class="tdcenter"> Actualizar y<br>eliminar ventas </th>
+                </tr>
+                </thead>
+                <tbody>
+                $users
+                </tbody>
+            </table>
+            </td>
+        <tr>
+      </tbody>
   </table>
-</center>
     <input value="Guardar" name="submit" type="submit">&nbsp;<input type="button" value="Regresar" onclick="location.href='index.php?_module=$_module';">
+</center>
 </form>
 
 

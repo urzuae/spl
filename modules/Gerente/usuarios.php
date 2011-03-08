@@ -2,9 +2,11 @@
   if (!defined('_IN_MAIN_INDEX')) {
     die ("No puedes acceder directamente a este archivo...");
 }
-global $db, $uid;
+global $db, $uid,$_site_name;
 
 $_css = $_themedir."css/".$_theme."/style.css";
+$_cssm = $_themedir."css/".$_theme."/main.css";
+
 $_theme = "";
 $sql  = "SELECT gid, super FROM users WHERE uid='$uid'";
 $result = $db->sql_query($sql) or die("Error");
@@ -23,8 +25,8 @@ if ($super > 6)
 		  $r3 = $db->sql_query($sql) or die("Error");
 		  list($prospectos) = $db->sql_fetchrow($r3);
 		  $rows .= "<tr class=\"row".(++$row_class%2+1)."\">
-					<td align=\"right\"> $a_user</td>
-					<td>$prospectos</td>
+					<td class='tdleft'> $a_user</td>
+					<td class='tdright'>$prospectos</td>
 				   </tr>";
 		}
 	}

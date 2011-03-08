@@ -1,73 +1,49 @@
 <form action="index.php?_module=Gerente&_op=monitoreo_alta_prospectos" name="form" method="post">
 <input type="hidden" name="send" value="true">
-<table cellspacing="2" cellpadding="2" border="0" align="center" width="40%">
-    <caption><h1>Monitoreo de registro de prospectos</h1></caption>
-    <thead>
+<table cellspacing="2" cellpadding="2" border="0" align="center" width="85%">
+    <thead><tr><th colspan="4" class="tdleft">Monitoreo de registro de prospectos</th></tr></thead>
+    <tbody>
         <tr>
-            <td colspan="4">Seleccione fechas</td>
+            <td colspan="2" class="tdcenter">Seleccione fechas</td>
         </tr>
-    </thead>
-    <tbody>
-        <tr align="center" class="row1">
-            <td colspan="4">Fecha de inicio:    <input value="" id="fecha_ini" name="fecha_ini" value="$fecha_ini" readonly/><img onmouseout="this.style.background=''" onmouseover="this.style.background='white';" title="Fecha" style="border: 1px solid white; cursor: pointer;" id="f_trigger_c" src="img/calendar.gif"/></td>
+        <tr align="center" >
+            <td class="tdcenter" width="100%">
+                <table width="50%" align="center" style="border:0px;">
+                    <tbody>
+                    <tr>
+                        <td width="50%" class="tdleft">Fecha de inicio:</td>
+                        <td class="tdleft"><input value="" id="fecha_ini" name="fecha_ini" value="$fecha_ini" /><img onmouseout="this.style.background=''" onmouseover="this.style.background='white';" title="Fecha" style="border: 1px solid white; cursor: pointer;" id="f_trigger_c" src="img/calendar.gif"/>
+                            <script>
+                            Calendar.setup({inputField :"fecha_ini",ifFormat :"%Y-%m-%d",onUpdate : update_fecha_fin,button : "f_trigger_c"});
+                            </script>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft">Fecha de fin:</td>
+                        <td class="tdleft">
+                        <input value="" id="fecha_fin" name="fecha_fin" value="$fecha_fin" /><img onmouseout="this.style.background=''" onmouseover="this.style.background='white';" title="Fecha" style="border: 1px solid white; cursor: pointer;" id="f_trigger_d" src="img/calendar.gif"/>
+                        <script>
+                        Calendar.setup({inputField :"fecha_fin",ifFormat :"%Y-%m-%d",onUpdate : update_fecha_ini,button : "f_trigger_d"});
+                        </script>
+                        </td></tr>
+                    <tr>
+                        <td class="tdcenter" colspan="2"><input type="submit" value="Consultar" name="submit"/></td>
+                    </tr>
+                </tbody>
+                </table>
+            </td>
         </tr>
-        <script>
-            Calendar.setup(
-            {
-              inputField :"fecha_ini",
-              ifFormat :"%Y-%m-%d",
-              onUpdate : update_fecha_fin,
-              button : "f_trigger_c"
-            }
-            );
-        </script>
-        <tr align="center" class="row1">
-            <td colspan="4">Fecha de fin:    <input value="" id="fecha_fin" name="fecha_fin" value="$fecha_fin" readonly/><img onmouseout="this.style.background=''" onmouseover="this.style.background='white';" title="Fecha" style="border: 1px solid white; cursor: pointer;" id="f_trigger_d" src="img/calendar.gif"/></td>
-        </tr>
-        <script>
-            Calendar.setup(
-            {
-              inputField :"fecha_fin",
-              ifFormat :"%Y-%m-%d",
-              onUpdate : update_fecha_ini,
-              button : "f_trigger_d"
-            }
-            );
-        </script>
-    </tbody>
-    <thead>
-        <tr class="row1">
-          <td align="center" colspan="4">
-            <input type="submit" value="Ver" name="submit"/>
-            <!-- <input type="button" value="Exportar a Excel" onmouseup="exportar_excel();">
-            <script>
-                function exportar_excel() {
-                    fecha_ini = "$fecha_ini";
-                    fecha_fin = "$fecha_fin";
-                    window.open("index.php?_module=$_module&_op=$_op&fecha_ini="+fecha_ini+"&fecha_fin="+fecha_fin+"&excel=true&send=true","_blank");
-                }
-            </script>-->
-          </td>
-        </tr>
-    </thead>
-    <tr>
-	<td>
-	    </br>
-	</td>
-    </tr>
-    <tbody>
-        <!-- <tr>
-            <td colspan="4" align="center">$_grafico</td>
-        </tr>-->
         <tr>
             <td colspan="4" align="center">
-            	<table>
-            		<thead>
-            			<tr>
-            				<td>ID Usuario</td>
-            				<td>Usuario</td>
-            				<td>Prospectos dados de alta</td>
-            			</tr>
+            	<table width="95%" align="center">
+                    <thead>
+                        <tr>
+                            <th width='21%' class="tdcenter">Usuario</th>
+                            <th width='21%' class="tdcenter">Prospectos asignados<br>por el Gerente</th>
+                            <th width='21%' class="tdcenter">Prospectos dados de alta<br>por el vendedor</th>
+                            <th width='21%' class="tdcenter">Total de prospectos<br>asignados</th>
+                            <th width='16%' class="tdcenter">%</th>
+            		</tr>
             		</thead>
             		<tbody>
             			$_html

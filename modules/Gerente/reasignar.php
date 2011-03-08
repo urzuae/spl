@@ -2,7 +2,8 @@
 if (! defined ( '_IN_MAIN_INDEX' )) {
     die ( "No puedes acceder directamente a este archivo..." );
 }
-global $db, $uid, $orderby, $rsort,$jquery;
+global $db, $uid, $orderby, $rsort,$jquery,$_site_title;
+$_site_title = "Reasignar-SFG0007";
 $sql = "SELECT gid, super FROM users WHERE uid='$uid'";
 $result = $db->sql_query ( $sql ) or die ( "Error" );
 list ( $gid, $super ) = $db->sql_fetchrow ( $result );
@@ -66,7 +67,7 @@ else
         }
     }
 
-    global $submit, $nombre, $apellido_paterno, $apellido_materno, $telefono, $contacto_id, $no_asignados, $order, $vehiculo, $fecha_desde, $fecha_hasta, $tipo;
+    global $submit, $nombre, $apellido_paterno, $apellido_materno, $telefono, $contacto_id, $no_asignados, $order, $vehiculo, $fecha_desde, $fecha_hasta, $tipo,$compania;
     if ($submit)
     {
         $array_origen=regresa_origenes($db);
@@ -91,7 +92,7 @@ else
                     (SELECT b.contacto_id, b.nombre,b.apellido_paterno,b.apellido_materno,b.origen_id, b.uid, b.gid,'crm-contactos-fin' AS tabla
                      FROM crm_contactos_finalizados b WHERE b.gid = $gid);";*/
         $sql_create="CREATE TABLE $tabla_tmp AS
-                    (SELECT b.contacto_id, b.nombre,b.apellido_paterno,b.apellido_materno,b.origen_id, b.uid, b.gid,'crm-contactos-fin' AS tabla
+                    (SELECT b.contacto_id, b.nombre,b.apellido_paterno,b.apellido_materno,b.origen_id, b.uid, b.gid,'crm-contactos-fin' AS tabla,b.compania
                      FROM crm_contactos_finalizados b WHERE b.gid = $gid);";
         $res_create=$db->sql_query($sql_create) or die("Error al crear la tabla:  ".$sql_create);
         // Preparamos los diversos filtros
@@ -117,7 +118,9 @@ else
             $filtros[]= " a.apellido_paterno LIKE '%$apellido_paterno%'";
         if ($apellido_materno)
             $filtros[]= " a.apellido_materno LIKE '%$apellido_materno%'";
-
+        if($compania)
+            $filtros[]= " a.compania LIKE '%$compania%'";
+        
         $tabla=" LEFT JOIN $tabla_tmp a ON c.contacto_id=a.contacto_id";
         $campo_c=" DISTINCT (c.contacto_id),c.uid AS uid_m,c.motivo_id as no_motivo,c.motivo as texto_motivo,c.timestamp,concat(a.nombre,' ',a.apellido_paterno,' ',a.apellido_materno) as nombre, a.origen_id,a.uid,a.gid,'Can' as tipo_finalizado ";
         $campo_v=" DISTINCT (c.contacto_id),c.uid AS uid_m,1 as no_motivo,'Venta' as texto_motivo,c.timestamp,concat(a.nombre,' ',a.apellido_paterno,' ',a.apellido_materno) as nombre, a.origen_id,a.uid,a.gid,'Ven' as tipo_finalizado ";
@@ -146,17 +149,17 @@ else
         {
             $lista_contactos.= "<center><div id=\"loading\"><img src=\"img/loading.gif\"></div></center>
                                 <table align='center' class='tablesorter' width='100%'>
-                                <thead><tr><td colspan='9' align='right' ><a targer=\"_blank\" href=\"index.php?_module=$_module&_op=reporte_reasignacion&orderby=origen_id&submit=1&rsort=$rsort&nombre=$nombre_bk&apellido_paterno=$apellido_paterno_bk&apellido_materno=$apellido_materno_bk&vehiculo=$vehiculo_bk&tipo=$tipo&fecha_desde=$fecha_desde&fecha_hasta=$fecha_hasta&gid=$gid\"><font color=\"white\">Exportar esta búsqueda a Excel</font></a></td></tr>
+                                <thead><tr><td colspan='9' class='tdright'><a targer=\"_blank\" href=\"index.php?_module=$_module&_op=reporte_reasignacion&orderby=origen_id&submit=1&rsort=$rsort&nombre=$nombre_bk&apellido_paterno=$apellido_paterno_bk&apellido_materno=$apellido_materno_bk&vehiculo=$vehiculo_bk&tipo=$tipo&fecha_desde=$fecha_desde&fecha_hasta=$fecha_hasta&gid=$gid\"><font color=\"white\">Exportar esta búsqueda a Excel</font></a></td></tr>
                                 <tr>
-                                <th>Campaña</th>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Dias desde el Útimo contacto</th>
-                                <th>Vehículo</th>
-                                <th>Último usuario asignado</th>
-                                <th width=\"10\">$tit</th>
-                                <th>Motivo</th>
-                                <th>Seleccionar</th>
+                                <th class='tdcenter'>Campaña</th>
+                                <th class='tdcenter'>ID</th>
+                                <th class='tdcenter'>Nombre</th>
+                                <th class='tdcenter'>Dias desde el Útimo contacto</th>
+                                <th class='tdcenter'>Producto</th>
+                                <th class='tdcenter'>Último usuario asignado</th>
+                                <th class='tdcenter' width=\"10\">$tit</th>
+                                <th class='tdcenter'>Motivo</th>
+                                <th class='tdcenter'>Seleccionar</th>
                                 </tr></thead>";
                 $contador_registros=0;
                 while ( list ( $c, $uid_m,$no_motivo,$motivo,$timestamp,$nombre,$origen_id,$c_uid,$gid,$tipo_finalizado) = htmlize ( $db->sql_fetchrow ( $result ) ) )
@@ -207,25 +210,25 @@ else
                          $motivo=ucfirst(strtolower($motivo));
                          $contador_registros++;
                          $lista_contactos .= "<tr class=\"row" . (++ $row_class % 2 + 1) . "\">
-                                    <td>$origen</td>
-                                    <td>$c</td>
-						           <td style=\"cursor:pointer;\" onclick=\"location.href='index.php?_module=Directorio&_op=contacto_finalizado&contacto_id=$c&last_module=$_module&last_op=$_op';\">{$nombre}</td>
-						           <td>$ultimo_contacto_timestamp</td>
-						           <td>$vehiculo</td>
-						           <td>$asignado_a</td>
-						           <td id=\"fecha_$c\" class=\"fecha\">$timestamp</td>
-						           <td id=\"motivo_$c\" class=\"motivo\">$motivo</td>
-						           <td><input type=\"checkbox\" name=\"chbx_$c\" style=\"height:12;width:16;\" ></td>
-						         </tr>";
+                                <td class='tdleft'>$origen</td>
+                                <td class='tdleft'>$c</td>
+                                <td class='tdleft' style=\"cursor:pointer;\" onclick=\"location.href='index.php?_module=Directorio&_op=contacto_finalizado&contacto_id=$c&last_module=$_module&last_op=$_op';\">{$nombre}</td>
+                                <td class='tdleft'>$ultimo_contacto_timestamp</td>
+                                <td class='tdleft'>$vehiculo</td>
+				<td class='tdleft'>$asignado_a</td>
+				<td id=\"fecha_$c\" class=\"fecha\">$timestamp</td>
+				<td id=\"motivo_$c\" class=\"motivo\">$motivo</td>
+				<td class='tdcenter'><input type=\"checkbox\" name=\"chbx_$c\" style=\"height:12;width:16;\" ></td>
+				</tr>";
                     }
                 }
-                $lista_contactos .= "<thead><tr class=\"row" . (++ $row_class % 2 + 1) . "\" style=\"text-align:center;\">
-                                 <td colspan=\"9\">Total de prospectos: $contador_registros </td></tr></thead>
-                                 <thead><tr class=\"row" . (++ $row_class % 2 + 1) . "\" style=\"text-align:center;\">
-                                       <td colspan=\"9\"><input name=\"all\" type=\"button\" onclick=\"allon();\" value=\"Todos\">&nbsp;" . "<input name=\"none\" type=\"button\" onclick=\"alloff();\" value=\"Ninguno\"></td>
+                $lista_contactos .= "<thead><tr class=\"row" . (++ $row_class % 2 + 1) . "\" >
+                                    <td colspan=\"9\" class='tdcenter'>Total de prospectos: $contador_registros </td></tr></thead>
+                                 <thead><tr class=\"row" . (++ $row_class % 2 + 1) . "\" >
+                                       <td colspan=\"9\" class='tdcenter'><input name=\"all\" type=\"button\" onclick=\"allon();\" value=\"Todos\">&nbsp;" . "<input name=\"none\" type=\"button\" onclick=\"alloff();\" value=\"Ninguno\"></td>
                                      </tr></thead>
-                                     <thead><tr class=\"row" . (++ $row_class % 2 + 1) . "\" style=\"text-align:center;\">
-                                     <td colspan=\"9\"><input type=\"submit\" name=\"seleccionar\" value=\"Preparar para asignación\"></td>
+                                     <thead><tr class=\"row" . (++ $row_class % 2 + 1) . "\">
+                                     <td colspan=\"9\" class='tdcenter'><input type=\"submit\" name=\"seleccionar\" value=\"Preparar para asignación\"></td>
                                   </tr></thead></table>";
             }
             else
@@ -240,7 +243,7 @@ else
             $vehiculo = $vehiculo_bk;
     }
     require_once ("$_includesdir/select.php");
-    $sql = "SELECT nombre from crm_unidades order by nombre asc";
+    $sql = "SELECT nombre from crm_unidades where active=1 order by nombre asc";
     $r = $db->sql_query ( $sql ) or die ( $sql );
     if($db->sql_numrows($r)>0)
     {

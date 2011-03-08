@@ -2,8 +2,9 @@
   if (!defined('_IN_MAIN_INDEX')) {
     die ("No puedes acceder directamente a este archivo...");
 }
-global $db, $uid, $id_user,$_includesdir,$_modulesdir,$ano_id,$buscar_proyeccion;
+global $db, $uid, $id_user,$_includesdir,$_modulesdir,$ano_id,$buscar_proyeccion,$_site_title;
 include_once("funcion_metas.php");
+$_site_title = "Proyeccion-SFG0004";
 $select_ano  = Regresa_Combo_Anos($ano_id);
 
 if($ano_id == '') $ano_id=date('Y');
@@ -23,16 +24,16 @@ if ($super == "6")
         $array_nms_vendedores=Regresa_Vendedores($db,$gid,$id_user);   #recupero los nombrede de los vendedeores de la con
         $array_meses=Regresa_Array_Meses();  #array con meses
 
-        $buffer.="<hr><br><p align='center' class='title'>
-                   Proyecci&oacute;n mensual del a&ntilde;o ".$ano_id."</p><br>
+        $buffer.="<p align='center' class='title'>
+                   Objetivos de ventas del a&ntilde;o ".$ano_id."</p>
                    <table border='0' align='center' class='tablesorter' width='100%'>
-                    <thead><tr height='30'>
-                    <th width='9%'>Vendedor</th>";
+                    <thead><tr>
+                    <th class='tdcenter' width='9%'>Vendedor</th>";
         foreach($array_meses as $id_mes => $nm_mes)   #Pinto encabezados por mes
         {
-            $buffer.="<th>".substr($nm_mes,0,3)."</th>";
+            $buffer.="<th class='tdcenter'>".substr($nm_mes,0,3)."</th>";
         }
-        $buffer.="<th>Total</th><th>Eliminar</th></tr></thead><tbody>";
+        $buffer.="<th class='tdcenter'>Total</th><th class='tdcenter'>Eliminar</th></tr></thead><tbody>";
 
         #recorro todos los vendedores
         $array_totales=array();
@@ -43,27 +44,28 @@ if ($super == "6")
             if(count($array_datos) > 0)
             {
                 $array_metas[$_uid]=normaliza_a_meses_totales($array_datos);
-                $buffer.="<tr class='row2'><td>".$array_nms_vendedores[$_uid]."</td>";
+                $buffer.="<tr ><td class='tdleft'>".$array_nms_vendedores[$_uid]."</td>";
                 foreach($array_meses as $mes_id => $valor)
                 {
                     $mes_id=$mes_id + 0 ;
                     $total=$total + $array_metas[$_uid][$mes_id];
                     $array_totales[$mes_id] = $array_totales[$mes_id] + $array_metas[$_uid][$mes_id];
-                    $buffer.="<td width='7%' align='right'><a href='index.php?_module=Gerente&_op=actualiza_proyeccion&uid=".$uid."&user_id=".$_uid."&ano=".$ano_id."&mes=".$mes_id."'>".number_format($array_metas[$_uid][$mes_id],0)."</a></td>";
+                    $buffer.="<td width='7%' class='tdright'><a href='index.php?_module=Gerente&_op=actualiza_proyeccion&uid=".$uid."&user_id=".$_uid."&ano=".$ano_id."&mes=".$mes_id."'>".number_format($array_metas[$_uid][$mes_id],0)."</a></td>";
                 }
-                $buffer.="<td align='right'>".number_format($total,0)."</td><td align='right'>
-                    <a href=\"#\" onclick=\"elimina_meta('$gid','$n_uid','$n_ano','$n_mes')\"><img src=\"img/del.gif\" onmouseover=\"return escape('Eliminar Proyeccion del Vendedor')\"  border=\"0\"></a>
+                $buffer.="<td class='tdright'>".number_format($total,0)."</td><td class='tdright'>
+                    <a href=\"#\" onclick=\"elimina_meta('$gid','$_uid','$ano_id','0')\"><img src=\"img/del.gif\" alt=\"Ayuda\" title=\"Elimina Meta\"   border=\"0\"></a>
                     </td></tr>";
             }
         }
-        $buffer.="</tbody><thead><tr><td>Totales</td>";
+        $buffer.="</tbody><thead><tr><th class='tdleft'>Totales</th>";
         foreach($array_meses as $mes_id => $valor)
         {
             $mes_id=$mes_id + 0 ;
             $total_anual=$total_anual + $array_totales[$mes_id];
-            $buffer.="<td width='7%' align='right'>".number_format($array_totales[$mes_id],0)."</td>";
+            $buffer.="<th width='7%' class='tdright'>".number_format($array_totales[$mes_id],0)."</th>";
         }
-        $buffer.="<td align='right'>".number_format($total_anual,0)."</td><td>&nbsp;</td></tr></thead></table>";
+        $buffer.="<th class='tdright'>".number_format($total_anual,0)."</th><th>&nbsp;</th></tr></thead></table>
+            <br><center>Para actualizar un objetivo de venta s&oacute;lo debe dar clic sobre la cantidad.";
         #saco las metas registradas
     }
 }

@@ -9,35 +9,37 @@
 
 <table cellspacing="2" cellpadding="2" border="0" align="center" width="50%">
     <thead>
-        <tr height="30">
-            <td colspan="2" align="center">Actualizaci&oacute;n de proyecci&oacute;n de ventas por mes</td>
+        <tr>
+            <th colspan="2" class="tdleft">Actualizaci&oacute;n de proyecci&oacute;n de ventas por mes</th>
         </tr>
     </thead>
     <tbody>
-        <tr class="row2" height="10">
+        <tr class="row2" >
             <td colspan="2">
-                <table width="100%" border="0" align="center">
-                    <tr><td>Vendedor</td><td>$username</td></tr>
-                    <tr><td>A&ntilde;o</td><td>$ano</td></tr>
-                    <tr><td>Mes</td><td>$nm_mes</td></tr></table>
+                <table width="100%" style="border:0px;" align="center">
+                    <tr><td class="tdleft" width="35%">Vendedor</td><td class="tdleft">$username</td></tr>
+                    <tr><td class="tdleft">A&ntilde;o</td><td class="tdleft">$ano</td></tr>
+                    <tr><td class="tdleft">Mes</td><td class="tdleft">$nm_mes</td></tr></table>
             </td>
         </tr>
     </tbody>
     <thead>
-        <tr height="30">
-            <td colspan="2" align="center">Cantidad Proyectada mensual</td>
+        <tr>
+            <th colspan="2" class="tdcenter">Cantidad Proyectada mensual</th>
         </tr>
     </thead>
     <tbody>
-        <tr class="row2" height="30">
-            <td style="width:100px;">Actualiza Cantidad</td>
-            <td style="width:200px;"><input name="cantidad" id="cantidad" value="$cantidad" onblur='this.value = moneyFormat(this.value);'></td>
+        <tr><td colspan="2" class="tdright">$obligatorio&nbsp;&nbsp;<cite>campo requerido</cite></td></tr>
+        <tr class="row2" >
+            <td class="tdleft" width="35%">Actualiza Cantidad</td>
+            <td class="tdleft" width="65%"><input name="cantidad" id="cantidad" value="$cantidad" onblur='this.value = moneyFormat(this.value);'>$obligatorio</td>
         </tr>
+        <tr class="row2" >
+            <td colspan="2" class="tdcenter">
+            <input type="submit" value="Actualizar Proyección" id="actualiza_proyeccion" name="actualiza_proyeccion" />
+            <input type="button" value="Regresar" id="regresar_proyeccion" name="regresar_proyeccion" onClick="location='index.php?_module=Gerente&_op=consulta_proyeccion&ano_id=$ano'"/>
+            </td>
     </tbody>
     </table>
-</br>
-<input type="submit" value="Actualizar Proyección" id="actualiza_proyeccion" name="actualiza_proyeccion" />
-<input type="button" value="Regresar" id="regresar_proyeccion" name="regresar_proyeccion" onClick="location='index.php?_module=Gerente&_op=consulta_proyeccion&ano_id=$ano'"/>
-</br>
 <center>$msg</center>
 </form>

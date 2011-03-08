@@ -5,6 +5,7 @@
   <meta content="">
 </head>
 <body>
+<script type="text/javascript" src="$_themedir/jquery/jquery.tablesorter.js"></script>
 <script>
 function validate(f)
 {
@@ -63,11 +64,11 @@ $(document).ready(function()
 <input name="_module" value="$_module" type="hidden"><input name="_op" value="monitoreo_vendedor_reasignar" type="hidden">
 <input name="uid" value="$uid" type="hidden">
 <input name="open" id="open" value="$open" type="hidden">
-<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2"> <tbody><tr>
-<td colspan="1" rowspan="1"> <h1>Monitoreo de Prospectos</h1>
-
-</td> </tr> <tr class="" ><td>$tabla_campanas</td>
-</tr>
-<tr class="" align="center"> <td>$paginacion_campanas</td></tr>
-<tr class="" align="center"> <td>$boton_excel</td></tr>
-</tbody></table></form></body></html>
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2"> 
+<thead<tr><th class="tdleft">Prospectos por ciclo de venta</th> </tr></thead>
+<tbody>
+    <tr><td class="tdcenter">$tabla_campanas</td></tr>
+    <tr><td class="tdcenter">$paginacion_campanas</td></tr>
+    <tr><td class="tdcenter">$boton_excel</td></tr>
+    </tbody>
+</table></form></body></html>

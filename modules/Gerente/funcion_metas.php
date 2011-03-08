@@ -14,6 +14,20 @@ function Regresa_Combo_Anos($ano_id)
     $combo.="</select>";
     return $combo;
 }
+function Regresa_Combo_Meses_Simple($meses_id)
+{
+    $array_meses= array('01' => 'Enero','02' => 'Febrero','03' => 'Marzo','04' => 'Abril','05' => 'Mayo','06' => 'Junio',
+                       '07' => 'Julio','08' => 'Agosto','09' => 'Septiembre','10' => 'Octubre','11' => 'Noviembre','12' => 'Diciembre');
+    $combo="<SELECT name='mes_id' id='mes_id' style='width:150px;'><option value='0'>Seleccione</option>";
+    foreach($array_meses as $id => $mes)
+    {
+        $tmp='';
+        if($id == $meses_id) $tmp=' SELECTED ';
+        $combo.="<option value='".$id."' ".$tmp.">".$mes."</option>";
+    }
+    $combo.="</select>";
+    return $combo;
+}
 function Regresa_Combo_Meses($array_meses)
 {
     if(count($array_meses) == 0) $array_meses=array(date('m'));
@@ -104,4 +118,31 @@ function Regresa_Vendedores($db,$gid,$id_user)
     return $array_uid;
 }
 
+function Viernes_del_mes($dia,$ano,$mes)
+{
+    $array=array();
+    if($dia != '-1')
+    {
+        if(trim($mes)!="")
+        {
+            $array_no_dias=Regresa_Combo_Dias();
+            $cant_dias =$array_no_dias[str_pad($mes,2,'0',STR_PAD_LEFT)];
+            for($i=1; $i<=$cant_dias; $i++)
+            {
+                if($dia  != '-1')
+                {
+                    if(date('w',strtotime($ano.'-'.$mes.'-'.$i))== $dia)
+                    {
+                        $array[]=$ano.'-'.str_pad($mes,2,'0',STR_PAD_LEFT).'-'.str_pad($i,2,'0',STR_PAD_LEFT);
+                    }
+                }
+            }
+        }
+    }
+    else
+    {
+        $array=array('','','','','');
+    }
+    return $array;
+}
 ?>

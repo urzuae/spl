@@ -4,7 +4,8 @@ if (!defined('_IN_MAIN_INDEX'))
     die ("No puedes acceder directamente a este archivo...");
 }
 require_once("$_includesdir/select.php");
-global $db, $submit, $uid, $_edo_civil;
+global $db, $submit, $uid, $_edo_civil,$_site_name,$_site_title;
+$_site_title = "Carga de prospectos-SFG0008";
 if ($submit)
 {
     $entidades = Genera_Entidades($db);
@@ -325,10 +326,10 @@ if ($submit)
     </tr>";
         }
 
-        $tabla_errores .= "<table style=\"width:100%;\">
+        $tabla_errores .= "<table width='100%' style='border:0px;'>
     <thead><tr>
-    <td><font color=\"white\">Linea</font></td>
-    <td><font color=\"white\">Error</font></td>
+    <td class='tdleft'>Linea</td>
+    <td class='tdleft'>Error</td>
     </tr></thead>
         $contenido_errores
     </table>
@@ -349,10 +350,10 @@ if ($submit)
                 <td>$motivo</td>
                 </tr>";
             }
-            $tabla_alertas .= "<table style=\"width:100%;\">
+            $tabla_alertas .= "<table style=\"width:100%;border:0px;\">
                                <thead><tr>
-                                    <td><font color=\"white\">Linea</font></td>
-                                    <td><font color=\"white\">Aviso</font></td>
+                                    <td class='tdleft'>Linea</td>
+                                    <td class='tdleft'>Aviso</td>
                                 </tr></thead>
                                 $contenido_alertas
                                 </table>";
@@ -363,13 +364,13 @@ if ($submit)
         }
   //  }
 
-    $tabla_contenido_contactos = "<table style=\"text-align: left; width: 100%;\" border=\"0\" cellpadding=\"2\" cellspacing=\"2\">
-  <tbody>
+    $tabla_contenido_contactos = "<table width='80%' align='center' border='0' cellpadding=\"2\" cellspacing=\"2\">
+  <thead>
     <tr>
-      <td colspan=\"2\" rowspan=\"1\">
-      <h1>Carga de contactos</h1>
-      </td>
+      <th colspan=\"2\" class='tdleft'>Carga de contactos</th>
     </tr>
+    </thead>
+    <tbody>
     <tr>
       <td colspan=\"2\"><strong>$mensaje_contactos</strong></td>
     </tr>

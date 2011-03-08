@@ -1,65 +1,43 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-<head>
-  <title>Nuevo Vendedor</title>
-  <script type="text/javascript" src="$_themedir/jquery/formValidate.js"></script>
-  <meta content="">
-</head>
 <body>
+    <script type="text/javascript" src="$_themedir/jquery/jquery.gritter.min.js"></script>
+    <script type="text/javascript" src="$_themedir/jquery/crm_vendedor.js"></script>
+    <form onchange="capsall(this);" name="new_user" action="index.php" method="post">
+    <input name="_module" value="$_module" type="hidden">
+    <input name="_op" value="$_op" type="hidden">
+    <input name="gid" id="gid" value="$gid" type="hidden">
+    <input name="uid" id="uid" value="$uid" type="hidden">
+    <input name="site_name" id="site_name" value="$_site_name" type="hidden">
+    
+        <table width="80%" border="0" cellpadding="2" cellspacing="1">
+        <thead><tr>
+                <th colspan="3" class="tdleft">Crear un nuevo Vendedor</th></tr></thead>
+        <tbody>
+            <tr>
+                <td colspan="3" class="tdright">$obligatorio&nbsp;&nbsp;<cite>campo requerido</cite></td>
+            </tr>
+            <tr>
+            <td width="30%" class="tdleft">Nombre de Usuario</td>
+            <td width="5%"  class="tdleft">$gid</td>
+            <td width="65%" class="tdleft">&nbsp;&nbsp;<input type="text" name="user" id="user"  value="$user" size="30" maxlength="40" onblur="check_chars(this, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789');check_min_length(this,4);caps1(this)">$obligatorio</td>
+            </tr>
+            <tr>
+                <td class="tdleft">Correo electr&oacute;nico</td>
+                <td class="tdleft">&nbsp;</td>
+                <td class="tdleft">&nbsp;&nbsp;<input type="text" name="mail1" id="mail1" value="$mail1" size="30"  maxlength="40" onblur="check_chars(this, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.@');check_min_length(this,6);">$obligatorio</td>
+            </tr>
+            <tr>
+                <td colspan="3" class="tdcenter">
+                    <input value="Crear" name="submit" id="guardavendedor" type="button">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" class="tdcenter">
+                    Despu&eacute;s de crear el usuario el sistema le enviar&aacute; via e-mail las claves de acceso
+                </td>
+            </tr>
 
-<script>
-    function valEmail(txt)
-    {
-        var b=/^[^@\s]+@[^@\.\s]+(\.[^@\.\s]+)+$/
-        return b.test(txt)
-    }
-    function validate(f)
-    {
-        var f = document.new_user;
-        if (f.user.value == "")
-        {
-            alert("Debe de proporcionar el usuario");
-            return false;
-        }
-        if(f.mail1.value == "")
-        {
-            alert("Debe de proporcionar el email");
-            return false;
-        }
-        else
-        {
-            if(!valEmail(f.mail1.value))
-            {
-                alert("Favor de proporcinar un correo valido");
-                return false;
-            }
-        }
-        return true;
-    }
-</script>
-<form onchange="capsall(this);" name="new_user" action="index.php" method="post" onsubmit="return validate(this);"><input name="_module" value="$_module" type="hidden"><input name="_op" value="$_op" type="hidden">
-    <span class="title">Crear un nuevo Vendedor</span>
-    <br><table style="text-align: left; width: 600px;" border="0" cellpadding="2" cellspacing="1">
-    <tbody>
-      <tr class="row1" height="30">
-        <td width="25%">Nombre de Usuario</td>
-        <td>$gid<input name="user" value="$user" size="35" maxlength="40" onblur="check_chars(this, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789');check_min_length(this,4);caps1(this)"> mínimo 4 caracteres $error</td>
-      </tr>      
-      <tr height="30">
-        <td> Correo electrónico</td>
-        <td style="padding-left: 28px;"><input size="35" name="mail1" value="$mail1" maxlength="40" onblur="check_chars(this, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.@');check_min_length(this,6);"> Ingresar el correo del nuevo vendedor</td>
-      </tr>
-      <tr height="30"><td>&nbsp;</td></tr>
-      <tr class="" height="30">
-        <td colspan="2" align="center">
-            <input value="Crear nuevo vendedor" name="submit" type="submit" onclick="Validate();">
-            &nbsp;&nbsp;
-            <input type="button" value="Cancelar" onclick="history.go(-1);">
-        </td>
-      </tr>
-    </tbody>
-  </table>
-$_html
+        </tbody>
+      </table>
 </form>
 
 

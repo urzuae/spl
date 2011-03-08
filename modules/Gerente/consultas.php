@@ -36,29 +36,28 @@ if(isset($submit))
         $encabezado="Listado de prospectos por filtro seleccionado";
         $buffer="<table align='center' class='tablesorter' width='100%'>
                  <thead><tr>
-                <th width='12%'>Evento</th>
-                <th width='8%'>Fase</th>
-                <th width='20%'>Nombre</th>
-                <th width='9%'>Unidad</th>
-                <th width='7%'>Tipo Pago</th>
-                <th width='15%'>Concesionaria</th>
-                <th width='13%'>Vendedor</th>
-                <th width='9%'>Ingreso</th></tr></thead><tbody>";
+                <th class='tdcenter' width='12%'>Evento</th>
+                <th class='tdcenter' width='8%'>Fase</th>
+                <th class='tdcenter' width='20%'>Nombre</th>
+                <th class='tdcenter' width='9%'>Unidad</th>
+                <th class='tdcenter' width='7%'>Tipo Pago</th>
+                <th class='tdcenter' width='15%'>Concesionaria</th>
+                <th class='tdcenter' width='13%'>Vendedor</th>
+                <th class='tdcenter' width='9%'>Ingreso</th></tr></thead><tbody>";
         while(list($contacto_id,$nombre,$evento_id,$fase_id,$xgid,$xuid,$unidad_id,$tipo_pago_id,$timestamp) = $db->sql_fetchrow($res))
         {
             $buffer.="<tr class=\"row".($class_row++%2?"2":"1")."\" style=\"cursor:pointer;height:30px;\" >
-                        <td>".$array_eventos[$evento_id]."</td>
-                        <td>".$array_fases[$fase_id]."</td>
-                        <td>".$nombre."</td>
-                        <td>".$array_unidades[$unidad_id]."</td>
-                        <td>".$array_tipo_pago[$tipo_pago_id]."</td>
-                        <td>".$array_gids[$xgid]."</td>
-                        <td>".$array_uids[$xuid]."</td>
-                        <td>".$timestamp."</td>
+                        <td class='tdleft'>".$array_eventos[$evento_id]."</td>
+                        <td class='tdleft'>".$array_fases[$fase_id]."</td>
+                        <td class='tdleft'>".$nombre."</td>
+                        <td class='tdleft'>".$array_unidades[$unidad_id]."</td>
+                        <td class='tdleft'>".$array_tipo_pago[$tipo_pago_id]."</td>
+                        <td class='tdleft'>".$array_gids[$xgid]."</td>
+                        <td class='tdleft'>".$array_uids[$xuid]."</td>
+                        <td class='tdleft'>".$timestamp."</td>
                     </tr>";
         }
-        $buffer.="</tbody><thead><tr><td colspan='8'>Total de Prospectos: ".$tuplas."</td></tr></thead></table>";
-
+        $buffer.="</tbody><thead><tr><td colspan='8'  class='tdleft'>Total de Prospectos: ".$tuplas."</td></tr></thead></table>";
     }
 }
 ?>

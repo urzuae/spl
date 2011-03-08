@@ -183,9 +183,16 @@ class Grafico_Ventas_Horizontales
                 if($monto_promedio == 0) $monto_promedio=1;
                 $monto_promedio=str_replace(',','',$monto_promedio);
 
-                $porcentaje_relacion_dia=(($precio_total /$monto_promedio)*100);
+                if($precio_total >=$monto_promedio)
+                {
+                    $porcentaje_relacion_dia=100;
+                }
+                else
+                {
+                    $porcentaje_relacion_dia=(($precio_total /$monto_promedio)*100);                    
+                }
                 $porcentaje_relacion_dia=number_format($porcentaje_relacion_dia,0);
-                
+                              
                 if($porcentaje_relacion_dia<=60)
                     $color="FF0000";
                 if( ($porcentaje_relacion_dia>60) && ($porcentaje_relacion_dia<86))
@@ -213,10 +220,10 @@ class Grafico_Ventas_Horizontales
             $f=fopen('salida.xml','w+');
             fwrite($f,$this->xml);
             fclose($f);
-            $this->buffer.="<table width='70%' align='center' border='0'>
+            $this->buffer.="<table width='70%' align='center' border='0' style='border:0px;'>
                             <tr><td align='left'><b>Vendedor</b>:  ".$this->array_metas[$_uid]['name']."<br>
                                                  <b>A&ntilde;o</b>:  ".$this->ano_id."<br>
-                                                 <b>Proyectado</b>:  $".$this->array_metas[$_uid]['cantidad']."</td></tr>
+                                                 <b>Objetivo de venta</b>:  $".$this->array_metas[$_uid]['cantidad']."</td></tr>
                             <tr><td align='center'>".renderChartHTML($this->include."/fusion/HLinearGauge.swf", "", $this->xml, "graficos", 750, 180, false)."</td></tr></table><br>";
         }
     }

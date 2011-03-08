@@ -6,6 +6,7 @@
 </head>
 <body>
 <h1>$_title</h1>
+<script type="text/javascript" src="$_themedir/jquery/jquery.tablesorter.js"></script>
 <script>
 function validate(f)
 {
@@ -26,7 +27,7 @@ thiselm.checked = sw;
 }
 }
 }
-
+ 
 $jsarray
 
 //var array_contacto_ids = Array(0, 78049);
@@ -126,59 +127,53 @@ $(document).ready(function()
     		widthFixed: true
     		
     	})
-	window.open("index.php?_module=$_module&_op=usuarios","usuarios","menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,navigation=no,titlebar=no,directories=no,width=170,height=300,left=200,top=0,alwaysraised=yes");
+	window.open("index.php?_module=$_module&_op=usuarios","usuarios","menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,navigation=no,titlebar=no,directories=no,width=220,height=300,left=200,top=0,alwaysraised=yes");
 	get_esperas();
 });
 $extra_js 
 </script>
-$msg
 <form onchange="capsall(this);" method="post" action="index.php" name="contacto" >
 <input name="_module" value="$_module" type="hidden"><input name="_op" value="$_op" type="hidden">
 <input name="order" value="$order" type="hidden">
-  <table class="width100" border="0" cellpadding="2" cellspacing="2">
+  <table width="80%" border="0" cellpadding="2" cellspacing="2" width="80%">
     <thead><tr>
-      <td colspan="4"><img alt="" src="img/search.gif">Buscar contacto</td>
+      <th colspan="4" class="tdleft">Asignaci&oacute;n de prospectos</th>
     </tr>
     </thead>
     <tbody>
-
-<tr class="row1">
-  <td style="width:10%;">Nombre</td>
-  <td  style="width:90%;"  colspan=3 >        
-        <table class="width100" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td class="tdleft" width="10%">Nombre</td>
+        <td class="tdleft" colspan=3 >
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="border:0px;">
           <tbody>
             <tr>
-              <td style="width: 33%;"><input class="width100" size="10" name="nombre" value="$nombre"></td>
-              <td style="width: 33%;"><input class="width100" size="10" name="apellido_paterno" value="$apellido_paterno" onblur="check_chars(this, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzñ ');caps1(this);"></td>
-              <td style="width: 33%;"><input class="width100" size="10" name="apellido_materno" value="$apellido_materno" onblur="check_chars(this, 'ABCDEFGHIJKLMNOPQRSTUVWXYZÑabcdefghijklmnopqrstuvwxyzñ ');caps1(this);"></td>
+              <td style="width: 33%;" class="tdleft"><input type="text" class="width100" size="30" name="nombre" value="$nombre"></td>
+              <td style="width: 33%;" class="tdleft"><input type="text" class="width100" size="25" name="apellido_paterno" value="$apellido_paterno" onblur="check_chars(this, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzñ ');caps1(this);"></td>
+              <td style="width: 33%;" class="tdleft"><input type="text" class="width100" size="25" name="apellido_materno" value="$apellido_materno" onblur="check_chars(this, 'ABCDEFGHIJKLMNOPQRSTUVWXYZÑabcdefghijklmnopqrstuvwxyzñ ');caps1(this);"></td>
             </tr>
           </tbody>
         </table>
-        
-  </td>
-</tr>
-<tr class="row2">
-<td>Producto</td>
-  <td colspan="3">
-  $select_modelo
-  </td>
-</tr>
-<!--<tr class="row1">
-  <td colspan=4 align=center><input type="submit" name="submit" value="Buscar"> <input type="button" value="Regresar" onclick="location.href='index.php?_module=$_module';"> <input  type="button"  value="Limpiar" onclick="this.form.nombre.value='';this.form.apellido_paterno.value='';this.form.apellido_materno.value='';this.form.buscar_asignado.selectedIndex=0;this.form.vehiculo.selectedIndex=0;"/></td>
-</tr>-->
+      </td>
+    </tr>
+   <tr >
+    <td class="tdleft" width="10%">Producto</td>
+    <td colspan="3" class="tdleft">$select_modelo</td>
+    </tr>
+    <tr>
+    <td colspan="4" class="tdcenter">
+        <input type="submit" name="submit" value="Buscar">&nbsp;
+        <input type="button" value="Regresar" onclick="location.href='index.php?_module=$_module';">&nbsp;
+        <input  type="button"  value="Limpiar" onclick="this.form.nombre.value='';this.form.apellido_paterno.value='';this.form.apellido_materno.value='';this.form.buscar_asignado.selectedIndex=0;this.form.vehiculo.selectedIndex=0;"/></td>
+    </tr>
     </tbody>
   </table>
-</form>
-
-<form onchange="capsall(this);" method="post" action="index.php" name="seleccionar" >
-</br>
-<input type="submit" name="submit" value="Buscar"> <input type="button" value="Regresar" onclick="location.href='index.php?_module=$_module';"> <input  type="button"  value="Limpiar" onclick="this.form.nombre.value='';this.form.apellido_paterno.value='';this.form.apellido_materno.value='';this.form.buscar_asignado.selectedIndex=0;this.form.vehiculo.selectedIndex=0;"/>
-</br>
-<input name="_module" value="$_module" type="hidden"><input name="_op" value="$_op" type="hidden">
 $msg
-$lista_contactos
 </form>
-<script>
-</script>
+<form onchange="capsall(this);" method="post" action="index.php" name="seleccionar" >
+    <input name="_module" value="$_module" type="hidden">
+    <input name="_op" value="$_op" type="hidden">
+    $msg
+    $lista_contactos
+</form>
 </body>
 </html>

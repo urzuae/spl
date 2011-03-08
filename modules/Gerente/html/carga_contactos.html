@@ -3,30 +3,25 @@
 <head>
   <title>Carga de contactos</title>
 </head>
-<body>
-  <table style="width: 200px; text-align: center; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
-    <tbody>
-      <tr align="center">
-        <td align="center">
-        </td>
-      </tr>
-    </tbody>
-  </table>
- 
-  $tabla_contenido_contactos
-
+<body>   
   <form enctype="multipart/form-data" method="post">
    <input type="hidden" name="_module" value="$_module">
    <input type="hidden" name="_op" value="$_op">
-    <br><br>
-    <center>
-      Cargar Archivo de Contactos:<br>
-      <input name="f" type="file"><br><br>
-      <input value="Cargar" type="submit" name="submit">
-      <input value="Regresar" type="button" name="r" onClick="location.href='index.php?_module=$_module';">
-      <p>La carga de archivos de contactos permite al gerente subir grandes cantidades de contactos desde archivos .csv</p>
-      <p><a href="../carga_prospectos_gerente.csv">Link al formato para el archivo de distribuidoras, en formato .csv .</a></p>
-    </center>
+    <table width="60%" align="center">
+        <thead><tr><th colspan="2" class="tdleft">Carga de prospectos</th></tr></thead>
+        <tbody><tr><td class="tdcenter"><input name="f" type="file"></td></tr>
+            <tr>
+                <td colspan="2" class="tdcenter">
+                    <input value="Cargar" type="submit" name="submit">
+                    &nbsp;&nbsp;
+                    <input value="Regresar" type="button" name="r" onClick="location.href='index.php?_module=$_module';">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p>La carga de archivos de contactos permite al Gerente subir grandes cantidades de contactos desde archivos .csv</p>
+    <p><a href="files/carga_prospectos_gerente.csv" style="text-decoration:underline;font-weight: bold;">Link al formato para el archivo de sucursales, en formato .csv.</a></p><br>
+    <p align="center">$tabla_contenido_contactos</p>
   </form>
   <br>
 </body>

@@ -1,69 +1,76 @@
+<script type="text/javascript" src="$_themedir/jquery/jquery.gritter.min.js"></script>
 <script type="text/javascript" src="$_themedir/jquery/crm_proyeccion.js"></script>
 <form action="$_SELF" name="form" method="post">
+<input name="site_name"   id="site_name"   value="$_site_name" type="hidden">
 <input type="hidden" name="_module" value="$_module">
 <input type="hidden" name="_op" value="$_op">
-<br><br>
+<input name="host_name"   id="host_name"   value="$_host_name" type="hidden">
 <table cellspacing="2" cellpadding="2" border="0" align="center" width="60%">
     <thead>
-        <tr height="30">
-            <td colspan="3" align="center">Proyecci&oacute;n de ventas por mes</td>
+        <tr>
+            <th colspan="3" class="tdleft">Objetivos de ventas por mes</th>
         </tr>
     </thead>
     <tbody>
-        <tr class="row2" height="50">
-            <td colspan="3">En caso de que la proyección sea la misma para varios meses, puede seleccionar m&aacute;s de un mes, basta con presionar la tecla <b>control</b> y dar <b>clic</b> en el mes deseado.</td>
+        <td colspan="3" class="tdright">$obligatorio&nbsp;&nbsp;<cite>campo requerido</cite></td>
+        <tr class="row2">
+            <td colspan="3" class="tdjustify">En caso de que el objetivo de venta sea el mismo para varios meses, puede seleccionar m&aacute;s de un mes, basta con presionar la tecla <b>control</b> y dar <b>clic</b> en el mes deseado.</td>
         </tr>
-        <tr class="row2" height="30">
-            <td width="30%">Mes a proyectar</td>
-            <td width="30%">$select_meses</td>
-            <td width="40%"><input type="checkbox" name="todos_meses" id="todos_meses" >&nbsp;&nbsp;Marcar Todos los meses</td>
-        </tr>
-        <tr class="row2" height="30">
-            <td colspan="3">&nbsp;</td>
+        <tr class="row2">
+            <td width="35%" class="tdleft">Mes(es) a proyectar</td>
+            <td width="35%" class="tdleft">$select_meses$obligatorio</td>
+            <td width="30%" class="tdcenter">
+                <input type="button" name="todos_meses" id="todos_meses" value="  Marcar meses " style="width:140px;"><br><br>
+                <input type="button" name="des_todos_meses" id="des_todos_meses" value="Desmarcar meses" style="width:140px;">
+            </td>
         </tr>
     </tbody>
     <thead>
-        <tr height="30">
-            <td colspan="3" align="center">Seleccione el a&ntilde;o a proyectar</td>
+        <tr>
+            <th colspan="3" class="tdcenter">Seleccione el a&ntilde;o</th>
         </tr>
     </thead>
     <tbody>
-        <tr class="row2" height="30">
-            <td style="width:100px;">A&ntilde;o</td>
-            <td style="width:200px;">$select_ano</td><td>&nbsp;</td>
+        <tr class="row2">
+            <td class="tdleft">A&ntilde;o</td>
+            <td class="tdleft">$select_ano$obligatorio</td><td class="tdcenter">&nbsp;</td>
         </tr>
     </tbody>
     <thead>
-        <tr height="30">
-            <td colspan="3" align="center">Cantidad Proyectada mensual</td>
+        <tr>
+            <th colspan="3" class="tdcenter">Cantidad Proyectada mensual</th>
         </tr>
     </thead>
     <tbody>
-        <tr class="row2" height="30">
-            <td style="width:100px;">Cantidad</td>
-            <td style="width:200px;"><input name="cantidad" id="cantidad" value="$cantidad" onblur='this.value = moneyFormat(this.value);'></td>
-            <td>&nbsp</td>
+        <tr class="row2">
+            <td class="tdleft">Cantidad</td>
+            <td class="tdleft"><input type="text" name="cantidad" id="cantidad" value="$cantidad" onblur='this.value = moneyFormat(this.value);'>$obligatorio</td>
+            <td class="tdcenter">&nbsp</td>
         </tr>
     </tbody>
     <thead>
-        <tr height="30">
-            <td colspan="3" align="center">Vendedores</td>
+        <tr>
+            <th colspan="3" class="tdcenter">Vendedores</th>
         </tr>
     </thead>
     <tbody>
-        <tr class="row2" height="50">
-            <td colspan="3">En caso de que la proyección mensual sea la misma para m&aacute;s de un vendedor, basta con presionar la tecla <b>control</b> y dar <b>clic</b> en el nombre del vendedor deseado.
+        <tr class="row2">
+            <td colspan="3"  class="tdjustify">En caso de que el objetivo de venta sea el mismo para m&aacute;s de un vendedor, basta con presionar la tecla <b>control</b> y dar <b>clic</b> en el nombre del vendedor deseado.</td>
         </tr>
-
-        <tr class="row2" height="30">
-            <td style="width:100px;">Favor de Seleccionar</td>
-            <td style="width:200px;">$combo_vendedores</td>
-            <td><input type="checkbox" name="todos_uids" id="todos_uids">&nbsp;&nbsp;Marcar todos los vendedores</td>
+        <tr class="row2">
+            <td class="tdleft">Favor de Seleccionar</td>
+            <td class="tdleft">$combo_vendedores$obligatorio</td>
+            <td class="tdcenter"><input type="button" name="todos_uids" id="todos_uids" value="Marcar vendedores" style="width:140px;"><br><br>
+            <input type="button" name="des_todos_uids" id="des_todos_uids" value="Desmarcar vendedores" style="width:140px;">
+            </td>
+        </tr>
+        <tr class="row2">
+            <td class="tdcenter" colspan="4">Para actualizar un objetivo de venta, favor de entrar al módulo de consultas de objetivos </td>
         </tr>
     </tbody>
 </table>
-</br>
-<input type="submit" value="Guardar Proyección" id="guarda_proyeccion" name="guarda_proyeccion" />
+</br><center>
+<input type="button" value="Guardar" id="guarda_proyeccion" name="guarda_proyeccion" /></center>
 </br>
 <center>$msg</center>
 </form>
