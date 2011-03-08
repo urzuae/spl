@@ -1,0 +1,69 @@
+<script type="text/javascript" src="$_themedir/jquery/jquery.gritter.min.js"></script>
+<script type="text/javascript" src="$_themedir/jquery/crm_notificaciones.js"></script>
+<form action="$_SELF" name="form" method="post">
+
+<input type="hidden" name="_module" value="$_module">
+<input type="hidden" name="_op" value="$_op">
+<input type="hidden" name="gid" id="gid"  value="$gid">
+<input name="site_name"   id="site_name"   value="$_site_name" type="hidden">
+<table cellspacing="2" cellpadding="2" border="0" align="center" width="80%">
+    <thead>
+        <tr>
+            <th colspan="2" class="tdleft">Notificaci&oacute;n de avances</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="tdcenter">
+                <table width="30%" style="border:0px;" align="center">
+                    <tbody>
+                        <tr>
+                            <td colspan="2" class="tdcenter">Seleccione el a&ntilde;o y mes</td>
+                        </tr>
+                        <tr class="row2" >
+                            <td class="tdleft" width="50%" >A&ntilde;o</td>
+                            <td class="tdleft" width="50%" >$select_ano</td>
+                        </tr>
+                        <tr class="row2">
+                            <td class="tdleft">Mes</td>
+                            <td class="tdleft">$select_meses</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr class="row2">
+            <td width="100%"  class="tdcenter" colspan="2" >Seleccionar el d&iacute;a de la semana en el cual desea recibir la notificación vía e-mail </td>
+        </tr>
+        <tr class="row2">
+            <td width="100%" class="tdcenter" colspan="2">
+                <table align="center" border="0" width="90%" style="border:0px;">
+                    <tr>
+                        <td class="tdcenter">
+                            <input type="radio" name="dia_sem" id="dia_sem" value="-1" checked>Sin orden&nbsp;
+                            <input type="radio" name="dia_sem" id="dia_sem" value="0">Domingo&nbsp;
+                            <input type="radio" name="dia_sem" id="dia_sem" value="1">Lunes&nbsp;
+                            <input type="radio" name="dia_sem" id="dia_sem" value="2">Martes&nbsp;
+                            <input type="radio" name="dia_sem" id="dia_sem" value="3">Mi&eacute;rcoles&nbsp;
+                            <input type="radio" name="dia_sem" id="dia_sem" value="4">Jueves&nbsp;
+                            <input type="radio" name="dia_sem" id="dia_sem" value="5">Viernes&nbsp;
+                            <input type="radio" name="dia_sem" id="dia_sem" value="6">S&aacute;bado&nbsp;
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table><br>
+<div id="selecciona_fechas"></div>
+<br>
+<center><input type='submit' value='Guardar Notificaciones' id='guarda_notificacion' name='guarda_notificacion' /></center>
+<div id="msg">$msg</div>
+
+<div class="ayuda">
+    <p span class="tdcenter">¿Necesita ayuda? De un clic en el ícono.<br>
+    <a href="$_modulesdir/Gerente/ayuda_almacena_fechas.php" onClick="return popup(this, 'notes')"><img src="http://www.pcsmexico.com/salesfunnel/root/img/ayuda.gif" alt="Ayuda" /></a>
+    </p>
+</div>
+
+</form>
