@@ -146,7 +146,7 @@ $(document).ready(function(){
  */
 function displayListTransmisionVehicle()
 {
-    var contentHtmlFilterTransmsion = "<td class='list'><select style='width: 200px;' name='listTransmision' id='listTramsmision' style='width:150px;'><option value='0'></option>";
+    var contentHtmlFilterTransmsion = "<td class='list'><select name='listTransmision' id='listTramsmision'><option value='0'></option>";
     var vehiculoId = $("#listVehicle option:selected").val();
     var version_id = $("#listVersion option:selected").val();
     if(vehiculoId == null)
@@ -176,7 +176,7 @@ function displayListTransmisionVehicle()
  */
 function displayListVersionVehicle()
 {
-    var contentHtmlFilterVersion = "<td class='list'><select style='width: 200px;' name='listVersion' id='listVersion' style='width:150px;'><option value='0'></option>";        
+    var contentHtmlFilterVersion = "<td class='list'><select name='listVersion' id='listVersion'><option value='0'></option>";        
     var idVehiculo = $("#listVehicle option:selected").val();    
     if(idVehiculo == null)
         idVehiculo = $("#idVehiculo").val();
@@ -200,7 +200,7 @@ function displayListVersionVehicle()
             return;
         }
         if(versions.error == 1)
-            alert("Ha ocurrido un error al cargar las versiones del vehiculo");
+            alert("Ha ocurrido un error al cargar las categorias del producto");
         return;
     });
 //event.preventDefault();
@@ -211,7 +211,7 @@ function displayListVersionVehicle()
  * Despliegue la lista de vehiculos en el filtrado por automovil
  */
 $(function(){
-    var contentHtmlFilterVehicle = "<td><select style='width: 200px;' name='listVehicle' id='listVehicle' style='width:150px;'><option value='0'></option>";    
+    var contentHtmlFilterVehicle = "<td><select name='listVehicle' id='listVehicle'><option value='0'></option>";    
     $.getJSON(urlFilterVehiculos,
     {
         uniteds : 1,
@@ -230,11 +230,11 @@ $(function(){
         }
         if(uniteds.error == 1)
         {
-            alert("Error al obtener el la lista de vehiculos");
+            alert("Error al obtener la lista de productos");
             return
         }
         else
-            alert("Se ha producido un error al obterner las lista de vehiculos");
+            alert("Se ha producido un error al obterner las lista de productos");
     });
     if($("#idVersion").val().length > 0)
     {

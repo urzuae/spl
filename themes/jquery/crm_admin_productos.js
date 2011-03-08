@@ -1,5 +1,8 @@
 
 var urlRegistraProducto ="index.php?_module=Modelos&_op=admin_producto";
+var name_prod;
+var name_cat;
+var name_sub;
 $(document).ready(function(){
     $("#marcar").click(function(){
         $('input').each(function(i, item){
@@ -20,7 +23,7 @@ $(document).ready(function(){
             document.getElementById("seleccionados").value=cadena_filtros;
             $.post(urlRegistraProducto,{opc:1,unidad_id:$("#unidad_id").val(),seleccionados:cadena_filtros,tipo:1},function(data){
                 $("#resultado").html(data);
-                location.href = "index.php?_module=Modelos&_op=edit&unidad_id="+$("#unidad_id").val();
+                //location.href = "index.php?_module=Modelos&_op=edit&unidad_id="+$("#unidad_id").val();
             });
 
         }
@@ -31,7 +34,6 @@ $(document).ready(function(){
 
     $("#asignar_categoria").click(function(){
         cadena_filtros='';
-        alert("asignar categorias    "+$("#unidad_id").val()+"     sub:   "+$("#categoria_id").val());
         $('input:checkbox:checked').each(function(i, item){
         cadena_filtros+=$(item).val()+"|";});
         if(cadena_filtros.length > 0)
@@ -48,21 +50,77 @@ $(document).ready(function(){
         }
     })
 
-
-
-    $("#actualiza_producto").click(function(){
-        if($("#unidad_id").val()>0)
+    $("#guarda_subcategoria").click(function(){
+        name_sub=$("#name_subcategoria").val();
+        if(name_sub.length>1)
         {
-            if($("#name_prod").val()=='')
+            if(confirm("Desea dar de alta la subcategoria"))
             {
-                alert("Por favor teclee el nombre del producto");
+                $.post(urlRegistraProducto,{opc:11,nm_subcategoria:name_sub},function(data){
+                    $("#resultado").html(data);
+                    location.href = "index.php?_module=Modelos&_op=editt&unidad_id="+$("#unidad_id").val()+"&categoria_id="+$("#categoria_id").val();
+                });
             }
-            else
+        }
+        else
+        {
+         alert("El tamaño minimo para este campo es de 2 caracteres");
+        }
+    });
+    
+    $("#guarda_categoria").click(function(){
+        name_cat=$("#name_categoria").val();
+        if(name_cat.length>1)
+        {
+            if(confirm("Desea dar de alta la categoria"))
             {
-                $.post(urlRegistraProducto,{opc:3,unidad_id:$("#unidad_id").val(),nm_unidad:$("#name_prod").val(),link_unidad:$("#url").val()},function(data){
+                $.post(urlRegistraProducto,{opc:10,nm_categoria:name_cat},function(data){
+                    $("#resultado").html(data);
+                    location.href = "index.php?_module=Modelos&_op=edit&unidad_id="+$("#unidad_id").val();
+                });
+            }
+        }
+        else
+        {
+         alert("El tamaño minimo para este campo es de 2 caracteres");
+        }
+    });
+    
+    $("#guarda_producto").click(function(){
+        name_prod=$("#name_prod").val();
+        if(name_prod.length>1)
+        {
+            if(confirm("Desea dar de alta el producto"))
+            {
+                $.post(urlRegistraProducto,{opc:9,nm_unidad:$("#name_prod").val()},function(data){
                     $("#resultado").html(data);
                     location.href = "index.php?_module=Modelos";
                 });
+            }
+        }
+        else
+        {
+         alert("El tamaño minimo para este campo es de 2 caracteres");
+        }
+    });
+    $("#actualiza_producto").click(function(){
+        if($("#unidad_id").val()>0)
+        {
+            name_prod=$("#name_prod").val();
+            if( (name_prod.length < 2) || (name_prod == ''))
+            {
+                alert("El tamaño minimo para este campo es de 2 caracteres");
+            }
+            else
+            {
+                if(confirm("Desea actualizar el nombre del producto"))
+                {
+                    $.post(urlRegistraProducto,{opc:3,unidad_id:$("#unidad_id").val(),nm_unidad:name_prod,link_unidad:$("#url").val()},function(data){
+                        $("#resultado").html(data);
+                        alert(data);
+                        location.href = "index.php?_module=Modelos";
+                    });
+                }
             }
         }
         else
@@ -81,15 +139,18 @@ $(document).ready(function(){
             }
             else
             {
-                $.post(urlRegistraProducto,{opc:4,categoria_id:$("#categoria_id").val(),nm_categoria:$("#name_categoria").val(),link_unidad:$("#url").val()},function(data){
-                    $("#resultado").html(data);
-                    location.href = "index.php?_module=Modelos&_op=edit&unidad_id="+$("#unidad_id").val();
-                });
+                if(confirm("Desea actualizar el nombre de la categoria"))
+                {
+                    $.post(urlRegistraProducto,{opc:4,categoria_id:$("#categoria_id").val(),nm_categoria:$("#name_categoria").val()},function(data){
+                        $("#resultado").html(data);
+                        location.href = "index.php?_module=Modelos&_op=edit&unidad_id="+$("#unidad_id").val();
+                    });
+                }
             }
         }
         else
         {
-            alert("Por favor seleccione un producto");
+            alert("Por favor teclee la categoria");
         }
     })
 
@@ -102,15 +163,18 @@ $(document).ready(function(){
             }
             else
             {
-                $.post(urlRegistraProducto,{opc:8,subcategoria_id:$("#subcategoria_id").val(),nm_subcategoria:$("#name_subcategoria").val(),link_unidad:$("#url").val()},function(data){
-                    $("#resultado").html(data);
-                    location.href = "index.php?_module=Modelos&_op=editt&unidad_id="+$("#unidad_id").val()+"&categoria_id="+$("#categoria_id").val();
-                });
+                if(confirm("Desea actualizar el nombre de la subcategoria"))
+                {
+                    $.post(urlRegistraProducto,{opc:8,subcategoria_id:$("#subcategoria_id").val(),nm_subcategoria:$("#name_subcategoria").val(),link_unidad:$("#url").val()},function(data){
+                       $("#resultado").html(data);
+                        location.href = "index.php?_module=Modelos&_op=editt&unidad_id="+$("#unidad_id").val()+"&categoria_id="+$("#categoria_id").val();
+                    });
+                }
             }
         }
         else
         {
-            alert("Por favor seleccione un producto");
+            alert("Por favor teclee la subcategoria");
         }
 
     })

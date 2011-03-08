@@ -102,6 +102,7 @@ $(document).ready(function (){
             $("#nm_ciclo_venta").show();
             $("#guardar_etapa").show();
             $("#actualiza_etapa").hide();
+            $("#nm_ciclo_venta").focus();
         }
         else
         {
@@ -162,6 +163,7 @@ function actualiza(consec,name)
     $("#guardar_etapa").hide();
     $("#actualiza_etapa").show();
     $("#nm_ciclo_venta").val(name);
+    $("#nm_ciclo_venta").focus();
 }
 function asciende(id,consec)
 {

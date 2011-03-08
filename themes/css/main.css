@@ -2,13 +2,9 @@
   font:12px/15px Arial, Helvetica, sans-serif;
 }
 
-body{padding:0px; margin:0px; color:#5F7A77; font:11px/15px Arial, Helvetica, sans-serif; }
+body{padding:0px; margin:0px; color:#5F7A77; font:11px/15px Arial, Helvetica, sans-serif;}
 div, p, ul, h2, h3, h4, h5, img{padding:0px; margin:0px;}
 ul{list-style-type:none}
-
-p {
-  text-align: center;
-}
 
 h1 {
   font-weight: bold;
@@ -25,6 +21,7 @@ b.menu {
   display: block;
   font-weight: bold;
   text-align: center;
+  border: solid 1px;
 }
 
 b {
@@ -43,12 +40,12 @@ b {
 	    width: 20em;
 	    text-align: right;
 	    clear: left;
-	    margin-right: 15px;
+	    margin-right; 15px;
 	}
 
 
 #content {
-  padding: 10px;
+  padding: 20px;
 }
 
 #main_wrapper {
@@ -58,32 +55,21 @@ b {
 
 #content_wrapper{
   margin-top: 15px;
-  width:100%;
-  height:100%;
+  width:auto;
+  height:auto;
 }
 
 #menu {
   float: left;
   width: 165px;
-  position: absolute;
-  text-align:left;
-  -moz-box-shadow: 10px 10px 5px #888;
-  -webkit-box-shadow: 10px 10px 5px #888;
-  box-shadow: 10px 10px 5px #888;
+  margin-right:30px;
 }
 
 #main {
   float: left;
   text-align:center;
-  margin-left:165px;
-  width: 75%;
-  position: absolute;
-  overflow: auto;
+  width: 73%;
   }
-
-#main .table {
-  text-align: center;
-}
   
 #imagen_izquierda {
   float: left;
@@ -105,17 +91,18 @@ b {
 }
 
 #header {
-
   padding: 0px;
   width: auto;
   height: 85px;
+  border: solid 1px;
 }
 
 #linea {
-
+  margin-top: 5px;
   width:auto;
   height: 30px;
 }
+
 
 
 /* Estilos para tablas */
@@ -135,15 +122,10 @@ table {
                 text-align: center;
 }
 
-td{
+td, th {
 		padding:5px;
-                text-align: center;
-                }
-
-th {
-  		padding:5px;
                 text-align: left;
-}
+                }
 
 caption {
 		padding: 0 0 .5em 0;
@@ -156,7 +138,7 @@ caption {
 }
 
 table a {
-		color:#666;
+		color:#950000;
 		text-decoration:none;
               
 }
@@ -170,11 +152,12 @@ table a:visited {
 }
 
 table a:hover {
-                color:#ec9540;
+		
+                text-decoration: underline;
 }
 
 thead th, tfoot th, tfoot td {
-                background:#ec9540 url(../../img/th.gif) repeat-x;
+                background:#333 url(../../img/th.gif) repeat-x;
 		color:#fff;
 }
 
@@ -214,6 +197,10 @@ tbody th a {
 
 #menu {
 
+        border: 1px solid #ACCFE8;
+
+        border-width: 1px 1px 0 1px;
+
         width: 150px;
 
 }
@@ -250,7 +237,7 @@ tbody th a {
 
         color: #fff;
 
-        background: #ec9540;
+        background: #333;
 
         display: block;
 

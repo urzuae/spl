@@ -14,6 +14,7 @@ $(document).ready(function (){
          if($("#padre_id").val() != 0)
          {
              displayListChilds(event,'padre_id','hijo_id_1',gid);
+             $("#origen").val($("#padre_id").val());
          }
         else
          {
@@ -26,13 +27,17 @@ $(document).ready(function (){
 
         $("#hijo_id_1").change(function(event){
         if($("#hijo_id_1").val() != 0){
+             $("#origen").val($("#hijo_id_1").val());
              displayListChilds(event,'hijo_id_1','hijo_id_2',gid);}});
 
         $("#hijo_id_2").change(function(event){
+            $("#origen").val($("#hijo_id_2").val());
          if($("#hijo_id_2").val() != 0){
+
              displayListChilds(event,'hijo_id_2','hijo_id_3',gid);}});
 
         $("#hijo_id_3").change(function(event){
+            $("#origen").val($("#hijo_id_3").val());
          if($("#hijo_id_3").val() != 0){
              displayListChilds(event,'hijo_id_3','hijo_id_4',gid);}});
 

@@ -24,28 +24,28 @@ h2 {
 b.menu {
   display: block;
   font-weight: bold;
-  text-align: center;
+  text-align: left;
 }
 
 b {
   font-weight: bold;
 }
 
-.title {
+/*.title {
   font-weight: bold;
   font-size: 16px;
   display: block;
   text-align: center;
-}
+}*/
 
-.label {
+/*.label {
 	    float: left;
 	    width: 20em;
 	    text-align: right;
 	    clear: left;
 	    margin-right: 15px;
 	}
-
+*/
 
 #content {
   padding: 10px;
@@ -64,18 +64,15 @@ b {
 
 #menu {
   float: left;
-  width: 165px;
+  width: 175px;
   position: absolute;
   text-align:left;
-  -moz-box-shadow: 10px 10px 5px #888;
-  -webkit-box-shadow: 10px 10px 5px #888;
-  box-shadow: 10px 10px 5px #888;
 }
 
 #main {
   float: left;
   text-align:center;
-  margin-left:165px;
+  margin-left:177px;
   width: 75%;
   position: absolute;
   overflow: auto;
@@ -132,12 +129,12 @@ table {
                 margin-left: auto;
                 margin-right: auto;
 		color: #333;
-                text-align: center;
+                text-align: left;
 }
 
 td{
 		padding:5px;
-                text-align: center;
+                text-align: left;
                 }
 
 th {
@@ -156,7 +153,7 @@ caption {
 }
 
 table a {
-		color:#666;
+		color:#666666;
 		text-decoration:none;
               
 }
@@ -166,24 +163,62 @@ table a:link {}
 table a:visited {
 		font-weight:normal;
 		color:#666;
-		
+}
+table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+    background-color: #8cb7d0;
+    border: 0px solid #FFF;
+    font-size: 8pt;
+    padding: 4px;
+    color: #FFF;
+    height:20px;
+    text-align: left;
+}
+table.tablesorter thead tr .header {
+	background-image: url(../../../img/bg.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+	cursor: pointer;
+        height:40px;
+        padding-left: 20px;
+}
+table.tablesorter tbody tr.odd td {
+	background-color:#FFF;
+	background-image:url(../../../img/bg.gif);
+}
+table.tablesorter thead tr .headerSortUp {
+height:40px;
+	background-image: url(../../../img/asc.gif);
+}
+table.tablesorter thead tr .headerSortDown {
+	background-image: url(../../../img/desc.gif);
+}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+background-color: #8cb7d0;
+color:#ffff99;
+font-weight: bold;
+height:40px;
 }
 
 table a:hover {
-                color:#ec9540;
+                color:#8cb7d0;
 }
 
 thead th, tfoot th, tfoot td {
-                background:#ec9540 url(../../img/th.gif) repeat-x;
+                background:#8cb7d0 url(../../img/th.gif) repeat-x;
 		color:#fff;
 }
-
+.tdleft_resaltar
+{
+    font-weight: bold;
+    background:#EFF4FB url(../../img/tables.gif) repeat-x;
+    color:#333333;
+}
 th {
   font-weight: bold;
 }
 
 tfoot td {
-		text-align:center;
+		text-align:left;
 }
 
 tbody th, tbody td {
@@ -202,19 +237,21 @@ tbody th a {
 
 .row1 {
 
+  /*background:#e6f1f0;*/
   background:#EFF4FB url(../../img/tables.gif) repeat-x;
 } 
 
 .row2 {
 
-  background:#EFF4FB url(../../img/tables2.gif) repeat-x;
+  /*background:#fff;*/
+  background:#EFF4FB url(../../img/tables.gif) repeat-x;
 }
 
 /* Temas para el menu */
 
 #menu {
 
-        width: 150px;
+        width: 170px;
 
 }
 
@@ -238,7 +275,6 @@ tbody th a {
 
 #menu li {
 
-        border-bottom: 1px solid #ACCFE8;
 
 }
 
@@ -250,7 +286,7 @@ tbody th a {
 
         color: #fff;
 
-        background: #ec9540;
+        background: #8cb7d0;
 
         display: block;
 
@@ -274,11 +310,12 @@ tbody th a {
 
 
 .treeview, .treeview ul {
-    padding: 0;margin: 0;list-style: none;
+    padding: 0;margin: 0;list-style: none; background-color:#EFF4FB;
 }
 
 .treeview ul {
-    background-color: white;margin-top: 4px;
+    background-color:#EFF4FB;
+    margin-top: 4px;
 }
 
 .treeview .hitarea {
@@ -291,10 +328,11 @@ tbody th a {
 
 .treeview li {
 	margin: 0;padding: 3px 0pt 3px 16px;
+        background-color:#EFF4FB;
 }
 
 .treeview a.selected {
-	background-color: #eee;
+	background-color:#EFF4FB;
 }
 
 #treecontrol { margin: 1em 0; display: none; }
@@ -307,7 +345,7 @@ tbody th a {
 .treeview .expandable-hitarea { background-position: -80px -3px; }
 
 .treeview li.last { background-position: 0 -1766px }
-.treeview li.lastCollapsable, .treeview li.lastExpandable { background-image: url(../../img/treeview-default.gif); }
+.treeview li.lastCollapsable, .treeview li.lastExpandable { background-image: url(../../../img/treeview-default.gif); }
 .treeview li.lastCollapsable { background-position: 0 -111px }
 .treeview li.lastExpandable { background-position: -32px -67px }
 
@@ -324,6 +362,8 @@ tbody th a {
 
 .treeview-famfamfam li { background-image: url(../../../img/treeview-famfamfam-line.gif); }
 .treeview-famfamfam .hitarea, .treeview-famfamfam li.lastCollapsable, .treeview-famfamfam li.lastExpandable { background-image: url(../../../img/treeview-famfamfam.gif); }
+
+.filetree li { padding: 3px 0 2px 16px; }
 
 /* Ayuda */
 
@@ -362,7 +402,7 @@ span.tool:hover span.tip {
   color: #000;
 }
 
-#content span.tool::after {
+#content span.tool:after {
   padding-left: 2px;            /* eye candy */
   content: url(/img/bubble.gif);
 }
@@ -375,3 +415,58 @@ span.tool:hover span.tip {
 form {
   text-align: left;
 }
+
+boton, input[type="submit"], input[type="button"], button{
+    text-align: center;
+    width: auto;
+  }
+  
+.tdcenter {
+  text-align:center;
+}
+
+.tdleft {
+  text-align: left;
+}
+
+.tdright {
+  text-align: right;
+}
+
+.tdjustify {
+  text-align: justify;
+}
+
+select{
+    width:180px;
+    border:1px solid #cdcdcd;
+    background-color: #fff;
+}
+input[type="text"]{
+    border:1px solid #cdcdcd;
+    background-color: #fff;
+}
+textarea{
+    border:1px solid #cdcdcd;
+    background-color: #fff;
+}
+
+input[type="password"]{
+    border:1px solid #cdcdcd;
+    background-color: #fff;
+}
+
+cite {
+  font-style: italic;
+  text-align: center;
+  color:#8cb7d0;
+  font-weight: bold;
+}
+.tdleftobli {
+    background:#fff url(../../../img/asterisco.png) repeat-x;
+    border:1px solid #fb9191;
+}
+#simplemodal-overlay {background-color:#000; cursor:wait;}
+#simplemodal-container {height:400px; width:700px; background-color:#ffffff; color:#8cb7d0; border:3px solid #8cb7d0;}
+#simplemodal-container a.modalCloseImg {background:url(../../../img/x.png) no-repeat; width:25px; height:29px; display:inline; z-index:3200; position:absolute; top:-15px; right:-18px; cursor:pointer;}
+#simplemodal-container #basicModalContent {padding:2px;}
